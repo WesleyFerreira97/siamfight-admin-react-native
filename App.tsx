@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
@@ -12,9 +12,10 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
   return (
+ 
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="SearchClient"
+        initialRouteName="AddClient"
         barStyle={{ 
           backgroundColor: '#C70039', 
           padding: 2
