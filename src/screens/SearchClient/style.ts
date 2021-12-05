@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         // flexDirection: 'row',
-        backgroundColor: '#C72C41',
+        // backgroundColor: '#C72C41',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     },
     fodase: {
         flex: 1,
-        backgroundColor: '#fdd242',
+        // backgroundColor: '#fdd242',
         width: '100%',
     },
     fodase2: {

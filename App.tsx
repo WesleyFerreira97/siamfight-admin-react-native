@@ -9,19 +9,24 @@ import { AddClient } from './src/screens/AddClient/index';
 import { Vencimentos } from './src/screens/Vencimentos/index';
 
 const Tab = createMaterialBottomTabNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="SearchClient"
+        barStyle={{ 
+          backgroundColor: '#C70039', 
+          padding: 2
+        }}
       >
         <Tab.Screen 
           name="SearchClient" 
           component={SearchClient} 
           options={{
-            title: 'Buscar Cliente',
+            title: 'Buscar',
             tabBarIcon: () => (
-              <Icon name="search" size={25} color="#fff" />
+              <Icon name="search" size={22} color="#fff" />
             ),
           }}
         />
@@ -29,9 +34,9 @@ export default function App() {
           name="AddClient" 
           component={AddClient} 
           options={{
-            title: 'Add Cliente',
+            title: 'Adicionar',
             tabBarIcon: () => (
-              <Icon name="user-plus" size={25} color="#fff"/>
+              <Icon name="user-plus" size={22} color="#fff"/>
             ),
           }}
         />
@@ -41,7 +46,7 @@ export default function App() {
           options={{
             title: 'Vencimentos',
             tabBarIcon: () => (
-              <Icon name="dollar-sign" size={25} color="#fff"/>
+              <Icon name="dollar-sign" size={22} color="#fff"/>
             ),
           }}
         />
