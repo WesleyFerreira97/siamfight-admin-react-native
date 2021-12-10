@@ -19,4 +19,3 @@ export function SearchClient({ navigation }: SearchClient) {
     ) 
 }
 
-

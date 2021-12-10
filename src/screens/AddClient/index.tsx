@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, TextInput, Button, Alert } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Button, Alert, Image, FlatList } from "react-native";
 import {
   Formik,
   FormikHelpers,
@@ -8,8 +8,15 @@ import {
   Field,
   FieldProps,
 } from 'formik';
-
+import { Checkbox } from 'react-native-paper';
 import { styles } from './style';
+
+
+import { db } from '../../services/firebaseconfig';
+import { addDoc, collection, getFirestore, getDocs  } from "firebase/firestore";
+import firestore from '@react-native-firebase/firestore';
+import "firebase/storage";
+import { setDoc, doc } from '@firebase/firestore';
 
 interface Values {
   name: string;
@@ -18,15 +25,35 @@ interface Values {
 }
 
 export function AddClient() {
+  const [task , setTask] = useState<any[]>([]);
+  const [pratica, setPratica] = useState([]);
   
+  useEffect(() => {
+    
+    async function tnc() {
+      const citiesRef = collection(db, "/krl");
+      const data = await getDocs(citiesRef);
+ 
+      setTask(data.docs.map((doc) => ({...doc.data(), id: doc.id })   ));
+      }
+  
+      tnc();
+  }, []);
+
   return (
     <View style={styles.container}>
+      {console.log(task)}
+      <Text style={styles.tnc}>{task}</Text>
       <Text style={styles.title}>Cadastro de Cliente</Text>
       <Formik
       initialValues={{ 
         name: '',
         naturalidade: '', 
         nacionalidade: '', 
+        contact1: '', 
+        contact2: '', 
+        peso: '', 
+        objetivo: '', 
       }}
       onSubmit={values => console.log(values)}
       >
@@ -53,7 +80,55 @@ export function AddClient() {
               placeholder="Nacionalidade"
               style={styles.input}
             />
-
+            <TextInput
+              keyboardType = 'numeric'
+              onChangeText={handleChange('contact1')}
+              onBlur={handleBlur('contact1')}
+              value={values.contact1}
+              placeholder="Contato 1"
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType = 'numeric'
+              onChangeText={handleChange('contact2')}
+              onBlur={handleBlur('contact2')}
+              value={values.contact2}
+              placeholder="Contato 2"
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType = 'numeric'
+              onChangeText={handleChange('peso')}
+              onBlur={handleBlur('peso')}
+              value={values.peso}
+              placeholder="Peso"
+              style={styles.input}
+            />
+            <TextInput
+              onChangeText={handleChange('objetivo')}
+              onBlur={handleBlur('objetivo')}
+              value={values.objetivo}
+              placeholder="Objetivo"
+              style={styles.input}
+            />
+            <View style={styles.checkarea}>
+              <Text style={styles.label}>Pratica Atividade Fisica:</Text>
+              <Checkbox
+                    status={pratica ? 'checked' : 'unchecked'}
+                    onPress={() => {
+                      // setPratica();
+                    }}
+                  />
+            </View>
+            <View style={styles.checkarea}>
+              <Text style={styles.label}>Quantas refeições diarias :   </Text>
+              <TextInput
+                onChangeText={handleChange('refeicoes')}
+                onBlur={handleBlur('refeicoes')}
+                value={values.objetivo}
+                style={styles.input}
+              />
+            </View>
             <View style={styles.button}>
               <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
             </View>

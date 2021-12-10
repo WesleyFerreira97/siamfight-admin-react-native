@@ -22,5 +22,17 @@ export const styles = StyleSheet.create({
     button: {
         marginBottom: 10,
         marginTop: 10,
+    },
+    label: {
+        color: '#fff',
+    },
+    checkarea: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    tnc: {
+        color: 'white',
+        backgroundColor: 'gray',
     }
 })
