@@ -11,10 +11,9 @@ import {
 import { Checkbox } from 'react-native-paper';
 import { styles } from './style';
 
-
 import { db } from '../../services/firebaseconfig';
-import { addDoc, collection, getFirestore, getDocs  } from "firebase/firestore";
-import firestore from '@react-native-firebase/firestore';
+import { addDoc, collection, getFirestore, getDocs  } from "firebase/firestore/lite";
+import firestore, { firebase } from '@react-native-firebase/firestore';
 import "firebase/storage";
 import { setDoc, doc } from '@firebase/firestore';
 
@@ -27,11 +26,12 @@ interface Values {
 export function AddClient() {
   const [task , setTask] = useState<any[]>([]);
   const [pratica, setPratica] = useState([]);
+
   
   useEffect(() => {
     
     async function tnc() {
-      const citiesRef = collection(db, "/krl");
+      const citiesRef = collection(db, "cliente");
       const data = await getDocs(citiesRef);
  
       setTask(data.docs.map((doc) => ({...doc.data(), id: doc.id })   ));
@@ -40,10 +40,36 @@ export function AddClient() {
       tnc();
   }, []);
 
+  useEffect(() => {
+    const vtnc = async () => {
+        try {
+            const docRef = await addDoc(collection(db, "obrabo"), {
+              first: "Wesley",
+              middle: "Ferreira",
+              last: "Costa",
+              born: 1997
+            });
+          
+            // console.log("Document written with ID: ", docRef.id);
+          } catch (e) { 
+            // console.error("Error adding document: ", e);
+          }
+    }
+    vtnc();
+}, []);
+
   return (
     <View style={styles.container}>
+      
       {console.log(task)}
-      <Text style={styles.tnc}>{task}</Text>
+      <Text style={styles.tnc}>
+        {task.map( (user) => {
+                      return (
+                          <Text key={user.id}>{user.first}</Text>
+                      )
+                  })}
+      </Text>
+
       <Text style={styles.title}>Cadastro de Cliente</Text>
       <Formik
       initialValues={{ 
