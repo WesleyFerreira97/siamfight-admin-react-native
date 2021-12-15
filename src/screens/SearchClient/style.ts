@@ -10,11 +10,27 @@ export const styles = StyleSheet.create({
     },
     listItem: {
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'row',
+        marginTop: 7,
+        marginBottom: 7,
+        borderRadius: 10,
+        backgroundColor: '#16213E',
+    },
+    icon: {
+        height: '100%',
+        width: '18%',
+        flex: 0,
+        fontSize: 23,
+        backgroundColor: '#C70039',
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        // borderTopLeftRadius: 10,        
+        padding: 15,
         color: '#fff',
-        width: '100%',
-        padding: 25,
-        borderBottomColor: '#fff',
-        borderBottomWidth: .5,
+    },
+    userName: {
+        alignSelf: 'center',
+        paddingLeft: 13,
     }
+    
 });

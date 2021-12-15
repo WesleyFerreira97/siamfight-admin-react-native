@@ -3,7 +3,8 @@ import { View, Text, TextInput, Image, Button, ScrollView, Touchable, TouchableO
 import { styles } from './style';
 import { db } from '../../services/firebaseconfig';
 import { addDoc, collection, getFirestore, getDocs  } from "firebase/firestore/lite";
-import { globalStyles } from '../../styles/globalStyles';
+import { globalStyles } from './../../styles/globalStyles';
+import Icon from 'react-native-vector-icons/Feather';
 interface SearchClient {
   navigation: any;
 }
@@ -34,10 +35,10 @@ export function SearchClient({ navigation }: SearchClient) {
     <ScrollView>
     <View style={globalStyles.container}>
       <View style={styles.submitButton}>
-        <Button 
+        {/* <Button 
           title="Buscaar"
           onPress={() => navigation.navigate('Vencimentos')}
-        />
+        /> */}
         
         
       </View>
@@ -46,7 +47,12 @@ export function SearchClient({ navigation }: SearchClient) {
         {clientes.map( (cliente) => {
                 return (
                   <TouchableOpacity onPress={() => tocado(cliente)} key={cliente.id}>
-                    <Text style={styles.listItem} >{cliente.name}</Text>
+                    
+                    <View style={styles.listItem} >
+                      <Icon name="user" style={styles.icon}/>
+                      <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>
+                    </View>
+
                   </TouchableOpacity>
                 )
             })}

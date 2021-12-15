@@ -8,8 +8,16 @@ export const globalStyles = StyleSheet.create( {
     },
     title: {
         color: '#fff',
-        fontSize: 20,
+        fontSize: 22,
         paddingBottom: 20,
+        fontWeight: '700',
+    },
+    titleSmall: {
+        color: '#fff',
+        fontSize: 15,
+    },
+    text: {
+        color: '#fff',
     },
     input: {
         height: 40,
