@@ -15,7 +15,7 @@ export default function App() {
  
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="AddClient"
+        initialRouteName="SearchClient"
         barStyle={{ 
           backgroundColor: '#C70039', 
           padding: 2
