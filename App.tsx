@@ -8,12 +8,18 @@ import { SearchClient } from './src/screens/SearchClient/index';
 import { AddClient } from './src/screens/AddClient/index';
 import { Vencimentos } from './src/screens/Vencimentos/index';
 
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text, IndexPath, Select, SelectItem  } from '@ui-kitten/components';
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+
+
   return (
     <>
     <StatusBar backgroundColor="#1A1A2E" />
+    <ApplicationProvider {...eva} theme={eva.light}>
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="SearchClient"
@@ -55,6 +61,7 @@ export default function App() {
       </Tab.Navigator>
 
     </NavigationContainer>
+    </ApplicationProvider>
     </>
     )
 }

@@ -3,8 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     scrollList: {
-        backgroundColor: 'black',
-        paddingBottom: 200,
+        // paddingBottom: 1,
     },
     form: {
         flex: 1,

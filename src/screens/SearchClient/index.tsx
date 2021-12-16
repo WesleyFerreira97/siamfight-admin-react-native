@@ -39,8 +39,8 @@ export function SearchClient({ navigation }: SearchClient) {
   }
 
   return (
-    <ScrollView style={styles.scrollList}>
     <View style={globalStyles.container}>
+      <ScrollView style={styles.scrollList}>
       <View style={styles.submitButton}>
         {/* <Button 
           title="Buscaar"
@@ -65,8 +65,8 @@ export function SearchClient({ navigation }: SearchClient) {
             })}
       </View>
 
-    </View> 
     </ScrollView>  
+    </View> 
     
     ) 
 }

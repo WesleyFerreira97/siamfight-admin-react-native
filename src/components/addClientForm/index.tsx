@@ -13,6 +13,8 @@ import { Checkbox } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
 
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, IndexPath, Select, SelectItem, Datepicker } from '@ui-kitten/components';
 
 interface MyValues  {
     name: string;
@@ -36,9 +38,17 @@ export function AddClientForm() {
     };
 
     const cliente = 'cliente';
+    const [date, setDate] = React.useState(new Date());
     
     return (
     <View>
+        <Datepicker
+        date={date}
+        onSelect={nextDate => setDate(nextDate)}
+        />
+
+
+
         <Text style={globalStyles.title}>Cadastro de Cliente</Text>
         <Formik
             initialValues={initialValues}
@@ -49,6 +59,7 @@ export function AddClientForm() {
             
         {({ handleChange, handleBlur, handleSubmit, values }) => (
             <ScrollView>
+
             <TextInput
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
