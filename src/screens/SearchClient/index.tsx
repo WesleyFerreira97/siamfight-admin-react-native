@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, Image, Button, ScrollView, Touchable, TouchableOpacity } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  Image, 
+  Button, 
+  ScrollView, 
+  Touchable, 
+  TouchableOpacity, 
+  StatusBar 
+} from 'react-native';
 import { styles } from './style';
-import { db } from '../../services/firebaseconfig';
-import { addDoc, collection, getFirestore, getDocs  } from "firebase/firestore/lite";
 import { globalStyles } from './../../styles/globalStyles';
 import Icon from 'react-native-vector-icons/Feather';
+
+import { db } from '../../services/firebaseconfig';
+import { collection, getDocs  } from "firebase/firestore/lite";
 interface SearchClient {
   navigation: any;
-}
-
-type Toutch = {
-  onPress(): void
 }
 
 export function SearchClient({ navigation }: SearchClient) {
   const [clientes , setClientes] = useState<any[]>([]);
   useEffect(() => {
     
-    async function tnc() {
+    async function getClients() {
       const citiesRef = collection(db, "cliente");
       const data = await getDocs(citiesRef);
       
       setClientes(data.docs.map((doc) => ({...doc.data(), id: doc.id })   ));
       }
   
-      tnc();
+      getClients();
   }, []); 
 
   const tocado = (data: object) => {
@@ -32,7 +39,7 @@ export function SearchClient({ navigation }: SearchClient) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollList}>
     <View style={globalStyles.container}>
       <View style={styles.submitButton}>
         {/* <Button 
@@ -60,6 +67,7 @@ export function SearchClient({ navigation }: SearchClient) {
 
     </View> 
     </ScrollView>  
+    
     ) 
 }
 

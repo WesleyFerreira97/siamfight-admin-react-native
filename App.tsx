@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
@@ -12,7 +12,8 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
   return (
- 
+    <>
+    <StatusBar backgroundColor="#1A1A2E" />
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="SearchClient"
@@ -54,5 +55,6 @@ export default function App() {
       </Tab.Navigator>
 
     </NavigationContainer>
+    </>
     )
 }
