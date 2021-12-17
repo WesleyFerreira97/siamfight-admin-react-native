@@ -8,8 +8,10 @@ export const styles = StyleSheet.create({
     form: {
         flex: 1,
     },
-    submitButton: {
-        flex: 2,
+    searchBar: {
+        paddingTop: 10,
+        paddingBottom: 10,
+
     },
     listItem: {
         flex: 1,

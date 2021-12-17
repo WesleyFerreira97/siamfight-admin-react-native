@@ -6,20 +6,15 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { SearchClient } from './src/screens/SearchClient/index';
 import { AddClient } from './src/screens/AddClient/index';
-import { Vencimentos } from './src/screens/Vencimentos/index';
-
-import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text, IndexPath, Select, SelectItem  } from '@ui-kitten/components';
+import { PaymentDates } from './src/screens/PaymentDates/index';
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 
-
   return (
     <>
     <StatusBar backgroundColor="#1A1A2E" />
-    <ApplicationProvider {...eva} theme={eva.light}>
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="SearchClient"
@@ -49,19 +44,17 @@ export default function App() {
           }}
         />
         <Tab.Screen 
-          name="Vencimentos" 
-          component={Vencimentos} 
+          name="PaymentDates" 
+          component={PaymentDates} 
           options={{
-            title: 'Vencimentos',
+            title: 'PaymentDates',
             tabBarIcon: () => (
               <Icon name="dollar-sign" size={22} color="#fff"/>
             ),
           }}
         />
       </Tab.Navigator>
-
     </NavigationContainer>
-    </ApplicationProvider>
     </>
     )
 }

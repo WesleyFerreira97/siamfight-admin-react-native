@@ -8,8 +8,10 @@ import {
   ScrollView, 
   Touchable, 
   TouchableOpacity, 
-  StatusBar 
+  StatusBar,
+  FlatList,
 } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from './../../styles/globalStyles';
 import Icon from 'react-native-vector-icons/Feather';
@@ -22,6 +24,10 @@ interface SearchClient {
 
 export function SearchClient({ navigation }: SearchClient) {
   const [clientes , setClientes] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const onChangeSearch = (query : any) => setSearchQuery(query);
+
   useEffect(() => {
     
     async function getClients() {
@@ -35,23 +41,34 @@ export function SearchClient({ navigation }: SearchClient) {
   }, []); 
 
   const tocado = (data: object) => {
-    navigation.navigate('Vencimentos', data)
+    navigation.navigate('SingleClient', data)
   }
+
+  // const renderItem = ({ item }: any) => (
+  //   <Item title={item.title} />
+  // );
 
   return (
     <View style={globalStyles.container}>
+      <Text style={globalStyles.title}>Todos Clientes</Text>
       <ScrollView style={styles.scrollList}>
-      <View style={styles.submitButton}>
+      <View style={styles.searchBar}>
+        
+        <Searchbar
+          placeholder="Procurar Cliente"
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+        />
+
         {/* <Button 
           title="Buscaar"
-          onPress={() => navigation.navigate('Vencimentos')}
+          onPress={() => navigation.navigate('PaymentDates')}
         /> */}
-        
-        
       </View>
 
       <View style={styles.form}>
         {clientes.map( (cliente) => {
+
                 return (
                   <TouchableOpacity onPress={() => tocado(cliente)} key={cliente.id}>
                     
@@ -63,6 +80,11 @@ export function SearchClient({ navigation }: SearchClient) {
                   </TouchableOpacity>
                 )
             })}
+            {/* <FlatList 
+                data={clientes}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+            /> */}
       </View>
 
     </ScrollView>  
