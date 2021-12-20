@@ -4,10 +4,8 @@ import { Searchbar } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from './../../styles/globalStyles';
 import { ListItem } from '../../components/ListItem/index';
-
-import { db } from '../../services/firebaseconfig';
 import { getData } from '../../services/firebaseFunctions';
-import { collection, getDocs  } from "firebase/firestore/lite";
+
 
 
 export function SearchClient({ navigation }: any) {
@@ -15,7 +13,7 @@ export function SearchClient({ navigation }: any) {
   const [allClients, setAllClients] = useState<any[]>([]);
   const [clientes , setClientes] = useState<any[]>([]);
 
-  const onChangeSearch = (query : any) => setSearch(query);
+  const onChangeSearch = (query: any) => setSearch(query);
 
   const listAsc = (list: any[]) => {
     let newList : any = [...list];
@@ -32,7 +30,6 @@ export function SearchClient({ navigation }: any) {
   }, []); 
  
   useEffect(() => {
-    
     if(search === '') {
       return listAsc(allClients);
     }
@@ -56,15 +53,12 @@ export function SearchClient({ navigation }: any) {
             value={search}
           />
         </View>
-        <Text style={globalStyles.title}>{search}</Text>
         <FlatList 
           data={clientes}
           renderItem={({ item }) => <ListItem cliente={item} />}
           keyExtractor={(item) => item.id}
         />
-
     </View> 
-    
     ) 
 }
 
