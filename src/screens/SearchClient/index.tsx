@@ -1,28 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  Image, 
-  Button, 
-  ScrollView, 
-  Touchable, 
-  TouchableOpacity, 
-  StatusBar,
-  FlatList,
-} from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from './../../styles/globalStyles';
-import Icon from 'react-native-vector-icons/Feather';
+import { ListItem } from './../../components/ListItem/index';
 
 import { db } from '../../services/firebaseconfig';
 import { collection, getDocs  } from "firebase/firestore/lite";
-interface SearchClient {
-  navigation: any;
-}
 
-export function SearchClient({ navigation }: SearchClient) {
+
+export function SearchClient({ navigation }: any) {
   const [clientes , setClientes] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,56 +27,32 @@ export function SearchClient({ navigation }: SearchClient) {
       getClients();
   }, []); 
 
-  const tocado = (data: object) => {
-    navigation.navigate('SingleClient', data)
-  }
-
-  // const renderItem = ({ item }: any) => (
-  //   <Item title={item.title} />
-  // );
 
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.title}>Todos Clientes</Text>
-      <ScrollView style={styles.scrollList}>
-      <View style={styles.searchBar}>
-        
-        <Searchbar
-          placeholder="Procurar Cliente"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
+        <View style={styles.searchBar}>
+          <Searchbar
+            placeholder="Procurar Cliente"
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+          />
+        </View>
+ 
+        <FlatList 
+          data={clientes}
+          renderItem={({ item }) => <ListItem cliente={item} />}
+          keyExtractor={(item) => item.id}
         />
 
-        {/* <Button 
-          title="Buscaar"
-          onPress={() => navigation.navigate('PaymentDates')}
-        /> */}
-      </View>
-
-      <View style={styles.form}>
-        {clientes.map( (cliente) => {
-
-                return (
-                  <TouchableOpacity onPress={() => tocado(cliente)} key={cliente.id}>
-                    
-                    <View style={styles.listItem} >
-                      <Icon name="user" style={styles.icon}/>
-                      <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>
-                    </View>
-
-                  </TouchableOpacity>
-                )
-            })}
-            {/* <FlatList 
-                data={clientes}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            /> */}
-      </View>
-
-    </ScrollView>  
     </View> 
     
     ) 
 }
+
+
+  
+
+
+
 

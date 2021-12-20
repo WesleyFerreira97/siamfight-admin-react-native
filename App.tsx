@@ -1,14 +1,32 @@
 import React from 'react'
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SearchClient } from './src/screens/SearchClient/index';
 import { AddClient } from './src/screens/AddClient/index';
 import { PaymentDates } from './src/screens/PaymentDates/index';
+import { SingleClient } from './src/screens/SingleClient/index';
 
 const Tab = createMaterialBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+
+function SearchStack() {
+  return (
+    <HomeStack.Navigator
+      initialRouteName="SearchClient"
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <HomeStack.Screen name="SearchClient" component={SearchClient} />
+      <HomeStack.Screen name="SingleClient" component={SingleClient} />
+    </HomeStack.Navigator>
+);
+}
+
 
 export default function App() {
 
@@ -24,8 +42,8 @@ export default function App() {
         }}
       >
         <Tab.Screen 
-          name="SearchClient" 
-          component={SearchClient} 
+          name="Search" 
+          component={SearchStack} 
           options={{
             title: 'Buscar',
             tabBarIcon: () => (
@@ -58,3 +76,4 @@ export default function App() {
     </>
     )
 }
+

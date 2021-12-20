@@ -18,3 +18,4 @@ export async function addData( collectionName: string, data: object )  {
         
     }
 }
+
