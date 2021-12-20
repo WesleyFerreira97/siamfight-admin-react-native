@@ -17,24 +17,34 @@ export function SearchClient({ navigation }: any) {
 
   const onChangeSearch = (query : any) => setSearch(query);
 
+  const listAsc = (list: any[]) => {
+    let newList : any = [...list];
+
+    newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
+    
+    setClientes(newList);
+  }
+
   useEffect(() => {
+      // Get Data from Database
       getData('cliente').then(data => { setAllClients(data as never) });
+      
   }, []); 
  
   useEffect(() => {
-
-    if(search === '') {
-      return setClientes(allClients);
-    }
     
+    if(search === '') {
+      return listAsc(allClients);
+    }
+
     const searchClientes = clientes.filter( cliente => {
         if(cliente.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
             return cliente;
         }
     });
-
-    setClientes(searchClientes);
-  }, [search]);
+    
+    listAsc(searchClientes);
+  }, [allClients, search]);
 
   return (
     <View style={globalStyles.container}>
