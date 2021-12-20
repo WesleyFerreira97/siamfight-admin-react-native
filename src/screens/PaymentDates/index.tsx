@@ -7,8 +7,8 @@ export function PaymentDates({cliente}: any) {
   const [selectedDate, handleDateChange] = useState<Date | null>(new Date());
   
   return (
-    <View >
-
+    <View style={globalStyles.container} >
+        <Text style={globalStyles.title}>Payment Date</Text>
    </View>
   );
 }

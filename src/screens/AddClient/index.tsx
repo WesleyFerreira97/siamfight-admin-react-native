@@ -31,8 +31,8 @@ export function AddClient() {
 
   return (
     <View style={globalStyles.container}>
-        {/* <Text style={globalStyles.title}>Cadastro de Cliente</Text> */}
-        {/* <Formik
+        <Text style={globalStyles.title}>Cadastro de Cliente</Text>
+        <Formik
             initialValues={initialValues}
             onSubmit={ (values) => {
                 addData('cliente', values);
@@ -117,7 +117,7 @@ export function AddClient() {
             </View>
             </ScrollView>
         )}
-        </Formik> */}
+        </Formik>
     </View>
   )
 }
