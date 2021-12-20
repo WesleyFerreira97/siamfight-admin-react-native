@@ -35,7 +35,7 @@ export default function App() {
     <StatusBar backgroundColor="#1A1A2E" />
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="SearchClient"
+        initialRouteName="PaymentDates"
         barStyle={{ 
           backgroundColor: '#C70039', 
           padding: 2
