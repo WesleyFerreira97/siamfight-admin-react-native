@@ -3,30 +3,38 @@ import { View, Text, FlatList, Button } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from './../../styles/globalStyles';
-import { ListItem } from './../../components/ListItem/index';
+import { ListItem } from '../../components/ListItem/index';
 
 import { db } from '../../services/firebaseconfig';
+import { getData } from '../../services/firebaseFunctions';
 import { collection, getDocs  } from "firebase/firestore/lite";
 
 
 export function SearchClient({ navigation }: any) {
+  const [search, setSearch] = useState('');
+  const [allClients, setAllClients] = useState<any[]>([]);
   const [clientes , setClientes] = useState<any[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const onChangeSearch = (query : any) => setSearchQuery(query);
+  const onChangeSearch = (query : any) => setSearch(query);
 
   useEffect(() => {
-    
-    async function getClients() {
-      const citiesRef = collection(db, "cliente");
-      const data = await getDocs(citiesRef);
-      
-      setClientes(data.docs.map((doc) => ({...doc.data(), id: doc.id })   ));
-      }
-  
-      getClients();
+      getData('cliente').then(data => { setAllClients(data as never) });
   }, []); 
+ 
+  useEffect(() => {
 
+    if(search === '') {
+      return setClientes(allClients);
+    }
+    
+    const searchClientes = clientes.filter( cliente => {
+        if(cliente.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+            return cliente;
+        }
+    });
+
+    setClientes(searchClientes);
+  }, [search]);
 
   return (
     <View style={globalStyles.container}>
@@ -35,10 +43,10 @@ export function SearchClient({ navigation }: any) {
           <Searchbar
             placeholder="Procurar Cliente"
             onChangeText={onChangeSearch}
-            value={searchQuery}
+            value={search}
           />
         </View>
- 
+        <Text style={globalStyles.title}>{search}</Text>
         <FlatList 
           data={clientes}
           renderItem={({ item }) => <ListItem cliente={item} />}
