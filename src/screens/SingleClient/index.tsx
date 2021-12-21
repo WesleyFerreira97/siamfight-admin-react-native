@@ -15,6 +15,7 @@ export function SingleClient({ navigation, route}: any) {
             <Text style={globalStyles.title}>Contato 1 : {route.params.contact1}</Text>
             <Text style={globalStyles.title}>Contato 2 : {route.params.contact2}</Text>
             <Text style={globalStyles.title}>Objetivo : {route.params.objective}</Text>
+            <Text style={globalStyles.title}>Objetivo : {route.params.date}</Text>
 
         </View>
 

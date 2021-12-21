@@ -6,6 +6,8 @@ import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
 import { Checkbox } from 'react-native-paper';
 import { addData } from '../../services/firebaseFunctions';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { DatePicker } from './../../components/DatePicker/index';
 
 interface MyValues  {
   name: string;
@@ -49,6 +51,7 @@ export function AddClient() {
                 placeholder="Nome Completo"
                 style={globalStyles.input}
             />
+            <DatePicker />
             <TextInput
                 onChangeText={handleChange('naturalidade')}
                 onBlur={handleBlur('naturalidade')}
