@@ -9,4 +9,4 @@ export function PaymentDates() {
         <Text style={globalStyles.title}>Payment Date</Text>
    </View>
   );
-}
+} 
