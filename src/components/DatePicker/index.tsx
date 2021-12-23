@@ -26,10 +26,15 @@ export function DatePicker (props: any) {
   return (
     <View style={styles.container}>
   
-      <Button icon="calendar" mode="contained" onPress={showDatePicker}>
-          Pagamento : &nbsp;   
-          <Text style={globalStyles.text}>{currentDate.getDate()}</Text> /
-          <Text style={globalStyles.text}>{currentDate.getMonth() +1}</Text> /
+      <Button 
+        icon="calendar" 
+        mode="contained" 
+        onPress={showDatePicker}
+        style={styles.datePickerButton}
+        >
+          <Text style={globalStyles.text}>Pagamento : &nbsp;</Text>
+          <Text style={globalStyles.text}>{currentDate.getDate()} /</Text> 
+          <Text style={globalStyles.text}>{currentDate.getMonth() +1} /</Text>
           <Text style={globalStyles.text}>{currentDate.getFullYear()}</Text>
       </Button>
         <DateTimePickerModal
