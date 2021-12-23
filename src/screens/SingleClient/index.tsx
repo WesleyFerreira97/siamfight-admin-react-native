@@ -22,3 +22,15 @@ export function SingleClient({ navigation, route}: any) {
         </>
     )
 }
+
+
+
+{/* <View style={globalStyles.checkarea}>
+<Text style={globalStyles.label}>Quantas refeições diarias :   </Text>
+<TextInput
+onChangeText={handleChange('refeicoes')}
+onBlur={handleBlur('refeicoes')}
+value={values.refeicoes}
+style={globalStyles.inputSmall}
+/>
+</View> */}

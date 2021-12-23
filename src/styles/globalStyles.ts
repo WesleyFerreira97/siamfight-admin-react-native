@@ -20,12 +20,16 @@ export const globalStyles = StyleSheet.create( {
         color: '#fff',
     },
     input: {
-        height: 40,
+        height: 30,
         marginTop: 5,
         marginBottom: 5,
         backgroundColor: '#fff',
         borderRadius: 5,
         padding: 7,
+    },
+    inputSmall: {
+        height: 25,
+        borderRadius: 5,
     },
     button: {
         marginBottom: 10,
@@ -33,8 +37,9 @@ export const globalStyles = StyleSheet.create( {
     },
     label: {
         color: '#fff',
+        fontSize: 15,
     },
-    checkarea: {
+    checkbox: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

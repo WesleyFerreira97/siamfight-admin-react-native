@@ -4,12 +4,10 @@ import { Formik } from 'formik';
 
 import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
-import { Checkbox } from 'react-native-paper';
 import { addData } from '../../services/firebaseFunctions';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { DatePicker } from './../../components/DatePicker/index';
+import { CheckBox } from '../../components/CheckBox/index';
 import { TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Feather';
 
 interface MyValues  {
   name: string;
@@ -18,6 +16,7 @@ interface MyValues  {
   peso: string;
   objetivo: string;
   date: any;
+  physicalActivity: boolean;
 }
 
 export function AddClient() {
@@ -29,6 +28,7 @@ export function AddClient() {
       peso: '', 
       objetivo: '', 
       date: '2020-01-01',
+      physicalActivity: false,
   };
 
   return (
@@ -39,31 +39,16 @@ export function AddClient() {
             onSubmit={ (values) => {
                 addData('Teste', values);
                 console.log(values);
-                // console.log(values.date);
-                
-                
-        }}
-            >
-            
+                console.log(values.physicalActivity);
+        }} >
         {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
             <ScrollView>
-                {/* <Icon name="search" size={22} color="#fff" /> */}
-                <TextInput
-      label="Email"
-      right={<TextInput.Icon name="eye" />}
-    />
             <TextInput
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
                 value={values.name}
                 placeholder="Nome Completo"
                 style={globalStyles.input}
-            />
-            <DatePicker 
-                values={values} 
-                setFieldValue={setFieldValue} 
-                handleSubmit={handleSubmit}
-                handleChange={handleChange}
             />
             <TextInput
                 keyboardType = 'numeric'
@@ -96,24 +81,17 @@ export function AddClient() {
                 placeholder="Objetivo"
                 style={globalStyles.input}
             />
-            <View style={globalStyles.checkarea}>
-                <Text style={globalStyles.label}>Pratica Atividade Fisica:</Text>
-                <Checkbox
-                    status={'das' ? 'checked' : 'unchecked'}
-                    onPress={() => {
-                        // setPratica();
-                    }}
-                    />
-            </View>
-            <View style={globalStyles.checkarea}>
-                <Text style={globalStyles.label}>Quantas refeições diarias :   </Text>
-                <TextInput
-                onChangeText={handleChange('refeicoes')}
-                onBlur={handleBlur('refeicoes')}
-                value={values.objetivo}
-                style={globalStyles.input}
-                />
-            </View>
+            <DatePicker 
+                values={values} 
+                setFieldValue={setFieldValue} 
+                handleSubmit={handleSubmit} 
+                handleChange={handleChange}
+            />
+            <CheckBox 
+                values={values}
+                setFieldValue={setFieldValue} 
+            />
+
             <View style={globalStyles.button}>
                 <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
             </View>

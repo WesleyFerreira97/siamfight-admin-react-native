@@ -16,9 +16,12 @@ export function DatePicker (props: any) {
   
   const handleConfirm = (date: any) => {
     setCurrentDate(new Date(date.toDateString()));
-    setFieldValue('date', currentDate);
     hideDatePicker();
   }
+
+  useEffect(() => {
+    setFieldValue('date', currentDate);
+  }, [currentDate])
 
   return (
     <View style={styles.container}>
@@ -26,7 +29,7 @@ export function DatePicker (props: any) {
       <Button icon="calendar" mode="contained" onPress={showDatePicker}>
           Pagamento : &nbsp;   
           <Text style={globalStyles.text}>{currentDate.getDate()}</Text> /
-          <Text style={globalStyles.text}>{currentDate.getMonth()}</Text> /
+          <Text style={globalStyles.text}>{currentDate.getMonth() +1}</Text> /
           <Text style={globalStyles.text}>{currentDate.getFullYear()}</Text>
       </Button>
         <DateTimePickerModal
