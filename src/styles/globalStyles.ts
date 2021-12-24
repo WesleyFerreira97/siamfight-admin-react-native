@@ -32,8 +32,8 @@ export const globalStyles = StyleSheet.create( {
         borderRadius: 5,
     },
     button: {
-        marginBottom: 10,
-        marginTop: 10,
+        marginBottom: 20,
+        marginTop: 20,
     },
     label: {
         color: '#fff',
@@ -44,4 +44,7 @@ export const globalStyles = StyleSheet.create( {
         flexDirection: 'row',
         alignItems: 'center',
     },
+    error: {
+        color: '#fff',
+    }
 });

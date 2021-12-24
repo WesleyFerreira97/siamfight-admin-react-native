@@ -90,4 +90,3 @@ export function SearchClient({ navigation, route }: any) {
 
 
 
-

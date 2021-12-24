@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, ScrollView } from "react-native";
 import { Formik } from 'formik';
-
+import * as Yup from 'yup';
 import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
@@ -21,6 +21,11 @@ interface MyValues  {
   physicalActivity: boolean;
 }
 
+const Validation = Yup.object().shape({
+    name: Yup.string().required("O campo nome é obrigatório"),
+});
+
+
 export function AddClient() {
     const navigation : any = useNavigation();
     const initialValues : MyValues = { 
@@ -37,13 +42,14 @@ export function AddClient() {
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cadastro de Cliente</Text>
             <Formik
+                validationSchema={Validation}
                 initialValues={initialValues}
                 onSubmit={ (values, {resetForm}) => {
                     addData('Testea', values);
                     resetForm();
                     navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
             }} >
-            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, resetForm }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, resetForm, errors }) => (
                 <ScrollView>
                 <TextInput
                     onChangeText={handleChange('name')}
@@ -97,6 +103,8 @@ export function AddClient() {
                 <View style={globalStyles.button}>
                     <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
                 </View>
+                {console.log(errors)}
+                {errors.name && <Text style={globalStyles.error}>{errors.name}</Text>}
 
                 </ScrollView>
             )}
