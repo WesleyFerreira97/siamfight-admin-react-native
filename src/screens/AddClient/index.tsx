@@ -19,12 +19,14 @@ interface MyValues  {
   objetivo: string;
   date: any;
   physicalActivity: boolean;
+  valor: string;
 }
 
-const Validation = Yup.object().shape({
+const validation = Yup.object().shape({
     name: Yup.string().required("O campo nome é obrigatório"),
+    contact1: Yup.string().required("O campo contato 1 é obrigatório"),
+    valor: Yup.number().required("O campo valor é obrigatório"),
 });
-
 
 export function AddClient() {
     const navigation : any = useNavigation();
@@ -36,26 +38,27 @@ export function AddClient() {
         objetivo: '', 
         date: '2020-01-01',
         physicalActivity: false,
+        valor: '120',
     };
 
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cadastro de Cliente</Text>
             <Formik
-                validationSchema={Validation}
+                validationSchema={validation}
                 initialValues={initialValues}
                 onSubmit={ (values, {resetForm}) => {
                     addData('Testea', values);
                     resetForm();
                     navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
             }} >
-            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, resetForm, errors }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <ScrollView>
                 <TextInput
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
                     value={values.name}
-                    placeholder="Nome Completo"
+                    placeholder="Nome Completo ( Obrigatório )"
                     style={globalStyles.input}
                 />
                 <TextInput
@@ -63,7 +66,7 @@ export function AddClient() {
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
                     value={values.contact1}
-                    placeholder="Contato 1"
+                    placeholder="Contato 1 ( Obrigatório )"
                     style={globalStyles.input}
                 />
                 <TextInput
@@ -89,6 +92,14 @@ export function AddClient() {
                     placeholder="Objetivo"
                     style={globalStyles.input}
                 />
+                <TextInput
+                    keyboardType = 'numeric'
+                    onChangeText={handleChange('valor')}
+                    onBlur={handleBlur('valor')}
+                    value={values.valor}
+                    placeholder="Valor pago"
+                    style={globalStyles.input}
+                />
                 <DatePicker 
                     values={values}
                     setFieldValue={setFieldValue} 
@@ -103,9 +114,6 @@ export function AddClient() {
                 <View style={globalStyles.button}>
                     <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
                 </View>
-                {console.log(errors)}
-                {errors.name && <Text style={globalStyles.error}>{errors.name}</Text>}
-
                 </ScrollView>
             )}
             </Formik>
