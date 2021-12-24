@@ -6,10 +6,11 @@ import { globalStyles } from './../../styles/globalStyles';
 import { ListItem } from '../../components/ListItem/index';
 import { getData } from '../../services/firebaseFunctions';
 
-export function SearchClient({ navigation }: any) {
+export function SearchClient({ navigation, route }: any) {
   const [search, setSearch] = useState('');
   const [allClients, setAllClients] = useState<any[]>([]);
   const [clientes , setClientes] = useState<any[]>([]);
+  const [triggerGetData, setTriggerGetData] = useState('');
 
   const onChangeSearch = (query: any) => setSearch(query);
 
@@ -17,15 +18,21 @@ export function SearchClient({ navigation }: any) {
     let newList : any = [...list];
 
     newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
-    
     setClientes(newList);
   }
 
   useEffect(() => {
+    if(route.params) {
+      // Trigger for useEffect > getData()
+      setTriggerGetData(route.params.name);
+    }
+
+  }, [route.params]);
+
+  useEffect(() => {
       // Get Data from Database
-      getData('cliente').then(data => { setAllClients(data as never) });
-      
-  }, []); 
+      getData('Testea').then(data => { setAllClients(data as never) });
+  }, [triggerGetData]); 
  
   useEffect(() => {
     if(search === '') {

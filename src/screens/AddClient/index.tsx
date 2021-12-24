@@ -7,7 +7,7 @@ import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
-import { TextInput } from 'react-native-paper';
+import { TextInput, Snackbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
 
@@ -22,7 +22,7 @@ interface MyValues  {
 }
 
 export function AddClient() {
-    const navigation = useNavigation();
+    const navigation : any = useNavigation();
     const initialValues : MyValues = { 
         name: '',
         contact1: '', 
@@ -32,6 +32,9 @@ export function AddClient() {
         date: '2020-01-01',
         physicalActivity: false,
     };
+    const [visible, setVisible] = useState(true);
+    const onToggleSnackBar = () => setVisible(!visible);
+    const onDismissSnackBar = () => setVisible(false);
 
     return (
         <View style={globalStyles.container}>
@@ -41,7 +44,7 @@ export function AddClient() {
                 onSubmit={ (values, {resetForm}) => {
                     addData('Testea', values);
                     resetForm();
-                    navigation.navigate('Search' as never);
+                    navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, resetForm }) => (
                 <ScrollView>
@@ -97,6 +100,19 @@ export function AddClient() {
                 <View style={globalStyles.button}>
                     <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
                 </View>
+
+                <Snackbar
+                    visible={visible}
+                    onDismiss={onDismissSnackBar}
+                    duration={3000}
+                    action={{
+                    label: 'Undo',
+                    onPress: () => {
+                        // Do something
+                    },
+                    }}>
+                    Hey there! I'm a Snackbar.
+                </Snackbar>
                 </ScrollView>
             )}
             </Formik>

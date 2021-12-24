@@ -5,8 +5,6 @@ import { globalStyles } from '../../styles/globalStyles';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/core';
 
-
-
 export function ListItem({cliente}: any) {
     const navigation = useNavigation();
 
