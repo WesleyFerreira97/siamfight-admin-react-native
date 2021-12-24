@@ -1,8 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, Button } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
 import { getDocument } from '../../services/firebaseFunctions';
 import { HeaderScreen  } from '../../components/header';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { DatePicker } from './../../components/DatePicker/index';
+import { CheckBox } from '../../components/CheckBox/index';
+import { styles } from './style';
+
+const validation = Yup.object().shape({
+    name: Yup.string().required("O campo nome é obrigatório"),
+    contact1: Yup.string().required("O campo contato 1 é obrigatório"),
+    valor: Yup.number().required("O campo valor é obrigatório"),
+});
 
 export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
@@ -16,11 +28,87 @@ export function SingleClient({ navigation, route}: any) {
     
     return (
         <View style={globalStyles.container}>
-             <HeaderScreen title="Cliente" />
             <Text style={globalStyles.title}>Cliente </Text>
             <Text style={globalStyles.title}>{route.params.name}</Text>
+            <Formik
+                validationSchema={validation}
+                initialValues={cliente}
+                onSubmit={ (values, {resetForm}) => {
+                    // addData('cliente', values);
+                    resetForm();
+            }} >
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
+                 <ScrollView>
+                <TextInput
+                    onChangeText={handleChange('name')}
+                    onBlur={handleBlur('name')}
+                    value={cliente.name}
+                    placeholder="Nome"
+                    left={<TextInput.Affix text="Nome :" />}
+                    style={globalStyles.input}
+                />
+                <TextInput
+                    keyboardType = 'numeric'
+                    onChangeText={handleChange('contact1')}
+                    onBlur={handleBlur('contact1')}
+                    value={cliente.contact1}
+                    placeholder="Contato 1 ( Obrigatório )"
+                    left={<TextInput.Affix text="Contato 1 : " />}
+                    style={globalStyles.input}
+                />
+                <TextInput
+                    keyboardType = 'numeric'
+                    onChangeText={handleChange('contact2')}
+                    onBlur={handleBlur('contact2')}
+                    value={cliente.contact2}
+                    placeholder="Contato 2"
+                    left={<TextInput.Affix text="Contato 2 : " />}
+                    style={globalStyles.input}
+                />
+                <TextInput
+                    keyboardType = 'numeric'
+                    onChangeText={handleChange('peso')}
+                    onBlur={handleBlur('peso')}
+                    value={cliente.peso}
+                    left={<TextInput.Affix text="Peso (kg): " />}
+                    placeholder="Peso"
+                    style={globalStyles.input}
+                />
+                <TextInput
+                    onChangeText={handleChange('objetivo')}
+                    onBlur={handleBlur('objetivo')}
+                    value={cliente.objetivo}
+                    placeholder="Objetivo"
+                    left={<TextInput.Affix text="Objetivo : " />}
+                    style={globalStyles.input}
+                />
+                <TextInput
+                    keyboardType = 'numeric'
+                    onChangeText={handleChange('valor')}
+                    onBlur={handleBlur('valor')}
+                    value={cliente.valor}
+                    placeholder="Valor pago"
+                    left={<TextInput.Affix text="Valor Pago : R$" />}
+                    style={globalStyles.input}
+                />
+                <DatePicker 
+                    values={values}
+                    setFieldValue={setFieldValue} 
+                    handleSubmit={handleSubmit} 
+                    handleChange={handleChange}
+                />
+                <CheckBox 
+                    values={values}
+                    setFieldValue={setFieldValue} 
+                />
+                
+                <View style={globalStyles.button}>
+                    <Button color="#C70039" title="Confirmar Alterações" />
+                </View>
 
-
+                </ScrollView>
+                )}
+                </Formik>
 
 
             {/* <Text style={globalStyles.title}>Contato 1 : {route.params.contact1}</Text>
