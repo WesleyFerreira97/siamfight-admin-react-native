@@ -20,7 +20,7 @@ export const globalStyles = StyleSheet.create( {
         color: '#fff',
     },
     input: {
-        height: 30,
+        height: 27,
         marginTop: 5,
         marginBottom: 5,
         backgroundColor: '#fff',

@@ -6,8 +6,6 @@ import { globalStyles } from './../../styles/globalStyles';
 import { ListItem } from '../../components/ListItem/index';
 import { getData } from '../../services/firebaseFunctions';
 
-
-
 export function SearchClient({ navigation }: any) {
   const [search, setSearch] = useState('');
   const [allClients, setAllClients] = useState<any[]>([]);
