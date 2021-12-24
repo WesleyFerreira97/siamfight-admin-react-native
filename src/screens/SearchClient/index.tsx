@@ -36,7 +36,7 @@ export function SearchClient({ navigation, route }: any) {
 
   useEffect(() => {
       // Get Data from Database
-      getData('Testea').then(data => { setAllClients(data as never) });
+      getData('cliente').then(data => { setAllClients(data as never) });
   }, [triggerGetData]); 
  
   useEffect(() => {

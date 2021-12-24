@@ -48,7 +48,7 @@ export function AddClient() {
                 validationSchema={validation}
                 initialValues={initialValues}
                 onSubmit={ (values, {resetForm}) => {
-                    addData('Testea', values);
+                    addData('cliente', values);
                     resetForm();
                     navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
             }} >

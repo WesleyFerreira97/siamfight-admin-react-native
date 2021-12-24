@@ -1,6 +1,6 @@
 import { db } from './firebaseconfig';
-import { addDoc, collection,getDocs } from 'firebase/firestore/lite';
-
+import { getDocFromServer } from "firebase/firestore";
+import { addDoc, collection, getDocs, doc, getDoc } from 'firebase/firestore/lite';
 interface Props {
     collectionName: string;
     data: object;
@@ -25,5 +25,16 @@ export async function getData( collectionName: string )  {
         
     } catch (error) {
         console.error("Porra mermão, deu merda!", error);
+    }
+}
+
+export async function getDocument( collectionName: string , docID: string) {
+    const docItem = doc(db, 'cliente', docID);
+    
+    try {
+        const docData = await getDoc(docItem);
+        return docData.data();
+    } catch (error) {
+        console.log("Deu ruim tio", error);
     }
 }

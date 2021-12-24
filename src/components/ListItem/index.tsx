@@ -6,18 +6,16 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/core';
 
 export function ListItem({cliente}: any) {
-    const navigation = useNavigation();
+    const navigation : any = useNavigation();
 
     return (
-        <View style={styles.form}>
-        <TouchableOpacity onPress={() => navigation.navigate('SingleClient' as never, cliente as never)}>
-          
+      <View style={styles.form}>
+        <TouchableOpacity onPress={() => navigation.navigate('SingleClient', cliente)}>
           <View style={styles.listItem} >
             <Icon name="user" style={styles.icon}/>
             <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>
           </View>
-
         </TouchableOpacity>
-    </View>
+      </View>
     )
 }
