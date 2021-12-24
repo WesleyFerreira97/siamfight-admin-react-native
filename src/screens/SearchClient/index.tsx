@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, FlatList, Button } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, Snackbar } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from './../../styles/globalStyles';
 import { ListItem } from '../../components/ListItem/index';
@@ -14,6 +14,10 @@ export function SearchClient({ navigation, route }: any) {
 
   const onChangeSearch = (query: any) => setSearch(query);
 
+  const [snackBarVisible, setSnackBarVisible] = useState(false);
+  const onToggleSnackBar = () => setSnackBarVisible(!snackBarVisible);
+  const onDismissSnackBar = () => setSnackBarVisible(false);
+
   const listAsc = (list: any[]) => {
     let newList : any = [...list];
 
@@ -23,6 +27,7 @@ export function SearchClient({ navigation, route }: any) {
 
   useEffect(() => {
     if(route.params) {
+      onToggleSnackBar();
       // Trigger for useEffect > getData()
       setTriggerGetData(route.params.name);
     }
@@ -63,6 +68,19 @@ export function SearchClient({ navigation, route }: any) {
           renderItem={({ item }) => <ListItem cliente={item} />}
           keyExtractor={(item) => item.id}
         />
+        <View style={styles.snackWrap}>
+          <Snackbar
+            visible={snackBarVisible}
+            onDismiss={onDismissSnackBar}
+            duration={3000}
+            action={{
+            label: 'Fechar',
+            }}
+            style={ styles.snackBar }
+            >
+              <Text style={styles.snackBarText}>Cliente registrado !</Text>
+          </Snackbar>
+        </View>
     </View> 
     ) 
 }

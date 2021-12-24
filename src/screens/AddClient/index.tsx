@@ -7,7 +7,7 @@ import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
-import { TextInput, Snackbar } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
 
@@ -32,9 +32,6 @@ export function AddClient() {
         date: '2020-01-01',
         physicalActivity: false,
     };
-    const [visible, setVisible] = useState(true);
-    const onToggleSnackBar = () => setVisible(!visible);
-    const onDismissSnackBar = () => setVisible(false);
 
     return (
         <View style={globalStyles.container}>
@@ -101,18 +98,6 @@ export function AddClient() {
                     <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
                 </View>
 
-                <Snackbar
-                    visible={visible}
-                    onDismiss={onDismissSnackBar}
-                    duration={3000}
-                    action={{
-                    label: 'Undo',
-                    onPress: () => {
-                        // Do something
-                    },
-                    }}>
-                    Hey there! I'm a Snackbar.
-                </Snackbar>
                 </ScrollView>
             )}
             </Formik>
