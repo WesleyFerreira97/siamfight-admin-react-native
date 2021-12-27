@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, ScrollView } from "react-native";
-import { Formik } from 'formik';
+import { Text, View, Button, ScrollView, TouchableOpacity } from "react-native";
+import { Formik, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
@@ -22,10 +22,10 @@ interface MyValues  {
   valor: string;
 }
 
-const validation = Yup.object().shape({
-    name: Yup.string().required("O campo nome é obrigatório"),
-    contact1: Yup.string().required("O campo contato 1 é obrigatório"),
-    valor: Yup.number().required("O campo valor é obrigatório"),
+const validation : any = Yup.object().shape({
+    name: Yup.string().required("O campo Nome é obrigatório"),
+    contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
+    valor: Yup.number().required("O campo Valor é obrigatório"),
 });
 
 export function AddClient() {
@@ -38,7 +38,7 @@ export function AddClient() {
         objetivo: '', 
         date: '2020-01-01',
         physicalActivity: false,
-        valor: '120',
+        valor: '',
     };
 
     return (
@@ -47,12 +47,14 @@ export function AddClient() {
             <Formik
                 validationSchema={validation}
                 initialValues={initialValues}
-                onSubmit={ (values, {resetForm}) => {
+                onSubmit={ (values, {resetForm }) => {
+                    console.log('onSubmit');
+                    
                     addData('cliente', values);
                     resetForm();
                     navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
             }} >
-            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, validateForm, touched  }) => (
                 <ScrollView>
                 <TextInput
                     onChangeText={handleChange('name')}
@@ -101,21 +103,33 @@ export function AddClient() {
                     style={globalStyles.input}
                 />
                 <DatePicker 
-                    values={values}
+                    values={values.date}
                     setFieldValue={setFieldValue} 
                     handleSubmit={handleSubmit} 
                     handleChange={handleChange}
                 />
+
                 <CheckBox 
-                    values={values}
+                    value={values}
                     setFieldValue={setFieldValue} 
                 />
 
-                <View style={globalStyles.button}>
-                    <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
+                <View style={globalStyles.errorWrap}>
+                    {console.log(errors)}
+                    {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
+                    {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}
+                    {errors.valor && touched.valor && <Text style={globalStyles.error}>{errors.valor}</Text>}
                 </View>
+
+                <TouchableOpacity >
+                    <View style={globalStyles.button}>
+                        <Button color="#C70039" onPress={handleSubmit} title="Cadastrar" />
+                    </View>
+                </TouchableOpacity>
                 </ScrollView>
+                
             )}
+
             </Formik>
         </View>
     )

@@ -92,7 +92,7 @@ export function SingleClient({ navigation, route}: any) {
                     style={globalStyles.input}
                 />
                 <DatePicker 
-                    values={values}
+                    value={values}
                     setFieldValue={setFieldValue} 
                     handleSubmit={handleSubmit} 
                     handleChange={handleChange}

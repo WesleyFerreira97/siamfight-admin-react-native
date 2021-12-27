@@ -27,7 +27,6 @@ function SearchStack() {
 );
 }
 
-
 export default function App() {
 
   return (
@@ -35,7 +34,7 @@ export default function App() {
     <StatusBar backgroundColor="#1A1A2E" />
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Search"
+        initialRouteName="AddClient"
         barStyle={{ 
           backgroundColor: '#C70039', 
           padding: 2

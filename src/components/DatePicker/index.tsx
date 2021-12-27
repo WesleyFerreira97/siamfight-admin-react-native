@@ -7,7 +7,7 @@ import { Button } from 'react-native-paper';
  
 
 export function DatePicker (props: any) {
-  const { handleSubmit, values, setFieldValue, handleChange } = props;
+  const { handleSubmit, value, setFieldValue, handleChange } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
   const [currentDate, setCurrentDate] = useState(new Date())
 
@@ -43,6 +43,7 @@ export function DatePicker (props: any) {
           locale="pt_BR"
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
+          date={value}
         />
         
 

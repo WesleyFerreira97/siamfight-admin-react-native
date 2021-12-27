@@ -44,7 +44,13 @@ export const globalStyles = StyleSheet.create( {
         flexDirection: 'row',
         alignItems: 'center',
     },
+    errorWrap: {
+        marginTop: 10,
+        marginBottom: 10,
+    },
     error: {
-        color: '#fff',
+        color: '#C70039',
+        lineHeight: 22,
+        fontSize: 15,
     }
 });
