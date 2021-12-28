@@ -91,12 +91,12 @@ export function SingleClient({ navigation, route}: any) {
                     left={<TextInput.Affix text="Valor Pago : R$" />}
                     style={globalStyles.input}
                 />
-                <DatePicker 
+                {/* <DatePicker 
                     value={values}
                     setFieldValue={setFieldValue} 
                     handleSubmit={handleSubmit} 
                     handleChange={handleChange}
-                />
+                /> */}
                 <CheckBox 
                     values={values}
                     setFieldValue={setFieldValue} 

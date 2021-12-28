@@ -64,6 +64,13 @@ export function AddClient() {
                     style={globalStyles.input}
                 />
                 <TextInput
+                    onChangeText={handleChange('contact1')}
+                    onBlur={handleBlur('contact1')}
+                    value={values.contact1}
+                    placeholder="Professor"
+                    style={globalStyles.input}
+                />
+                <TextInput
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
@@ -71,7 +78,7 @@ export function AddClient() {
                     placeholder="Contato 1 ( Obrigatório )"
                     style={globalStyles.input}
                 />
-                <TextInput
+                {/* <TextInput
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
@@ -86,7 +93,7 @@ export function AddClient() {
                     value={values.peso}
                     placeholder="Peso"
                     style={globalStyles.input}
-                />
+                /> */}
                 <TextInput
                     onChangeText={handleChange('objetivo')}
                     onBlur={handleBlur('objetivo')}
@@ -101,21 +108,21 @@ export function AddClient() {
                     value={values.valor}
                     placeholder="Valor pago"
                     style={globalStyles.input}
-                />
+                />              
                 <DatePicker 
-                    values={values.date}
+                    title="Pagamento"
+                    iconName="calendar"
+                    mode="time"
+                    value={values.date}
                     setFieldValue={setFieldValue} 
-                    handleSubmit={handleSubmit} 
-                    handleChange={handleChange}
                 />
-
+                
                 <CheckBox 
                     value={values}
                     setFieldValue={setFieldValue} 
                 />
 
                 <View style={globalStyles.errorWrap}>
-                    {console.log(errors)}
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
                     {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}
                     {errors.valor && touched.valor && <Text style={globalStyles.error}>{errors.valor}</Text>}

@@ -5,47 +5,70 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { styles } from './style'; 
 import { Button } from 'react-native-paper';
  
+interface dateProps {
+    title?: string;
+    iconName?: string;
+    mode?: any;
+    value: Date;
+    setFieldValue: any;
+}
 
-export function DatePicker (props: any) {
-  const { handleSubmit, value, setFieldValue, handleChange } = props;
+const DateComponent : any = (currentDateTime: Date) => {
+  console.log(currentDateTime);
+  
+  return (
+    <>
+      {/* <Text style={globalStyles.text}>{currentDateTime.getDate()} /</Text> 
+      <Text style={globalStyles.text}>{currentDateTime.getMonth() +1} /</Text>
+      <Text style={globalStyles.text}>{currentDateTime.getFullYear()}</Text> */}
+    </>
+  )
+}
+
+export function DatePicker (props: dateProps) {
+  const { title, iconName, mode, value, setFieldValue } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
-  const [currentDate, setCurrentDate] = useState(new Date())
-
+  const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date())
+  
   const showDatePicker = () => setDatePickerVisibility(true)
   const hideDatePicker = () => setDatePickerVisibility(false)
   
   const handleConfirm = (date: any) => {
-    setCurrentDate(new Date(date.toDateString()));
+    setCurrentDateTime(new Date(date.toDateString()));
     hideDatePicker();
   }
 
   useEffect(() => {
-    setFieldValue('date', currentDate);
-  }, [currentDate])
+    setFieldValue('date', currentDateTime);
+  }, [currentDateTime])
 
   return (
     <View style={styles.container}>
   
       <Button 
-        icon="calendar" 
+        icon={iconName} 
         mode="contained" 
         onPress={showDatePicker}
         style={styles.datePickerButton}
         >
-          <Text style={globalStyles.text}>Pagamento : &nbsp;</Text>
-          <Text style={globalStyles.text}>{currentDate.getDate()} /</Text> 
-          <Text style={globalStyles.text}>{currentDate.getMonth() +1} /</Text>
-          <Text style={globalStyles.text}>{currentDate.getFullYear()}</Text>
-      </Button>
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          locale="pt_BR"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-          date={value}
-        />
-        
+          <Text style={globalStyles.text}>{title} : &nbsp;</Text>
+          <DateComponent currentDateTime={currentDateTime} />
+      {/* <Text style={globalStyles.text}>{currentDateTime.getDate()} /</Text> 
+      <Text style={globalStyles.text}>{currentDateTime.getMonth() +1} /</Text>
+      <Text style={globalStyles.text}>{currentDateTime.getFullYear()}</Text>  */}
+      <Text style={globalStyles.text}>{currentDateTime.getUTCHours()}</Text> 
+      </Button> 
+
+      
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={mode}
+        locale="pt_BR"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        // date={value}
+      />
+      
 
    </View>
   )
