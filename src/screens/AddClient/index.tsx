@@ -112,7 +112,7 @@ export function AddClient() {
                 <DatePicker 
                     title="Pagamento"
                     iconName="calendar"
-                    mode="time"
+                    mode="date"
                     value={values.date}
                     setFieldValue={setFieldValue} 
                 />

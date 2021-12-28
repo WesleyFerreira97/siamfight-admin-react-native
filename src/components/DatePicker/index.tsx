@@ -13,14 +13,24 @@ interface dateProps {
     setFieldValue: any;
 }
 
-const DateComponent : any = (currentDateTime: Date) => {
-  console.log(currentDateTime);
-  
+interface dateTime {
+    currentDateTime: Date;
+}
+
+const DateComponent : any = (props: dateTime) => {
   return (
     <>
-      {/* <Text style={globalStyles.text}>{currentDateTime.getDate()} /</Text> 
-      <Text style={globalStyles.text}>{currentDateTime.getMonth() +1} /</Text>
-      <Text style={globalStyles.text}>{currentDateTime.getFullYear()}</Text> */}
+      <Text style={globalStyles.text}>{props.currentDateTime.getDate()} /</Text> 
+      <Text style={globalStyles.text}>{props.currentDateTime.getMonth() +1} /</Text>
+      <Text style={globalStyles.text}>{props.currentDateTime.getFullYear()}</Text>
+    </>
+  )
+}
+
+const TimeComponent : any = (props: dateTime) => {
+  return (
+    <>
+      <Text style={globalStyles.text}>{props.currentDateTime.getHours()}</Text>
     </>
   )
 }
@@ -34,7 +44,7 @@ export function DatePicker (props: dateProps) {
   const hideDatePicker = () => setDatePickerVisibility(false)
   
   const handleConfirm = (date: any) => {
-    setCurrentDateTime(new Date(date.toDateString()));
+    setCurrentDateTime(new Date(date.toLocaleString()));
     hideDatePicker();
   }
 
@@ -52,11 +62,10 @@ export function DatePicker (props: dateProps) {
         style={styles.datePickerButton}
         >
           <Text style={globalStyles.text}>{title} : &nbsp;</Text>
-          <DateComponent currentDateTime={currentDateTime} />
-      {/* <Text style={globalStyles.text}>{currentDateTime.getDate()} /</Text> 
-      <Text style={globalStyles.text}>{currentDateTime.getMonth() +1} /</Text>
-      <Text style={globalStyles.text}>{currentDateTime.getFullYear()}</Text>  */}
-      <Text style={globalStyles.text}>{currentDateTime.getUTCHours()}</Text> 
+        { mode === 'time' 
+          ? <TimeComponent currentDateTime={currentDateTime} /> 
+          : <DateComponent currentDateTime={currentDateTime} />
+         }
       </Button> 
 
       
@@ -68,8 +77,6 @@ export function DatePicker (props: dateProps) {
         onCancel={hideDatePicker}
         // date={value}
       />
-      
-
    </View>
   )
 }
