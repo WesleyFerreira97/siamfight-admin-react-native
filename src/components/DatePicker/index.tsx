@@ -11,7 +11,7 @@ interface dateProps {
     mode?: any;
     value: Date;
     setFieldValue: any;
-    docId: any;
+    fieldId: any;
 }
 
 interface dateTime {
@@ -38,7 +38,7 @@ const TimeComponent : any = (props: dateTime) => {
 }
 
 export function DatePicker (props: dateProps) {
-  const { title, iconName, mode, value, setFieldValue, docId } = props;
+  const { title, iconName, mode, value, setFieldValue, fieldId } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
   const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date())
   
@@ -50,13 +50,26 @@ export function DatePicker (props: dateProps) {
     hideDatePicker();
   }
   
-  useEffect(() => {
-    setFieldValue(docId, currentDateTime);
-  }, [currentDateTime])
+  // useEffect(() => {
+  //   async function takipariu() {
+  //     setCurrentDateTime(new Date(value.toLocaleDateString()));
+  //   }
+  //   takipariu();
+  // }, []);
 
+  
+  // useEffect(() => {
+  //   async function porra() {
+  //     setFieldValue(fieldId, currentDateTime);
+  //   }
+  //   porra();
+  // }, [currentDateTime]);
+  
+  
+  
   return (
     <View style={styles.container}>
-
+      {console.log(props, 'valueeee')}
       <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>
           <View style={dateStyle.iconWrap}>
             <Icon name={iconName} style={dateStyle.icon}/>
@@ -76,7 +89,7 @@ export function DatePicker (props: dateProps) {
         locale="pt_BR"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        // date={value}
+        date={value}
       />
    </View>
   )

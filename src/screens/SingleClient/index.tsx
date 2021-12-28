@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
@@ -10,10 +10,11 @@ import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
 import { styles } from './style';
 
-const validation = Yup.object().shape({
-    name: Yup.string().required("O campo nome é obrigatório"),
-    contact1: Yup.string().required("O campo contato 1 é obrigatório"),
-    valor: Yup.number().required("O campo valor é obrigatório"),
+const validation : any = Yup.object().shape({
+    name: Yup.string().required("O campo Nome é obrigatório"),
+    contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
+    valor: Yup.number().required("O campo Valor é obrigatório"),
+    payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
 });
 
 export function SingleClient({ navigation, route}: any) {
@@ -26,9 +27,11 @@ export function SingleClient({ navigation, route}: any) {
         });
     }, [route.params.id]);
     
+    
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cliente </Text>
+            {console.log(cliente)}
             <Text style={globalStyles.title}>{route.params.name}</Text>
             <Formik
                 validationSchema={validation}
@@ -46,6 +49,15 @@ export function SingleClient({ navigation, route}: any) {
                     placeholder="Nome"
                     left={<TextInput.Affix text="Nome :" />}
                     style={globalStyles.input}
+                />
+                {console.log(cliente.birthDate, 'BirthDateeee')}
+                <DatePicker 
+                    title="Data de Nascimento"
+                    iconName="activity"
+                    mode="date"
+                    fieldId="birthDate"
+                    value={values.birthDate}
+                    setFieldValue={setFieldValue} 
                 />
                 <TextInput
                     keyboardType = 'numeric'
@@ -97,11 +109,12 @@ export function SingleClient({ navigation, route}: any) {
                     handleSubmit={handleSubmit} 
                     handleChange={handleChange}
                 /> */}
-                  <DatePicker 
-                    title="Data de Pagamento"
-                    iconName="calendar"
+                <DatePicker     
+                    title="Data de Nascimento"
+                    iconName="activity"
                     mode="date"
-                    value={values.date}
+                    fieldId="birthDate"
+                    value={values.birthDate}
                     setFieldValue={setFieldValue} 
                 />
                 <CheckBox 

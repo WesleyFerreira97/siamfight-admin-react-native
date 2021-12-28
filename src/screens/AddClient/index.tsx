@@ -39,9 +39,9 @@ export function AddClient() {
         contact2: '', 
         peso: '', 
         objetivo: '', 
-        payDay: '',
-        prefTime: '',
-        birthDate: '',
+        payDay: new Date(),
+        prefTime: new Date('August 19, 2002 05:00:00'),
+        birthDate: new Date('2018-10-2'),
         physicalActivity: false,
         valor: '',
     };
@@ -72,7 +72,7 @@ export function AddClient() {
                     title="Data de Nascimento"
                     iconName="activity"
                     mode="date"
-                    docId="birthDate"
+                    fieldId="birthDate"
                     value={values.birthDate}
                     setFieldValue={setFieldValue} 
                 />
@@ -119,7 +119,7 @@ export function AddClient() {
                     title="Data de Pagamento"
                     iconName="calendar"
                     mode="date"
-                    docId="payDay"
+                    fieldId="payDay"
                     value={values.payDay}
                     setFieldValue={setFieldValue} 
                 />
@@ -127,7 +127,7 @@ export function AddClient() {
                     title="Horário de preferência"
                     iconName="clock"
                     mode="time"
-                    docId="prefTime"
+                    fieldId="prefTime"
                     value={values.prefTime}
                     setFieldValue={setFieldValue} 
                 />
