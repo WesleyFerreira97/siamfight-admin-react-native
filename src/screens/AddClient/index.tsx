@@ -17,7 +17,9 @@ interface MyValues  {
   contact2: string;
   peso: string;
   objetivo: string;
-  date: any;
+  payDay: any;
+  prefTime: any;
+  birthDate: any;
   physicalActivity: boolean;
   valor: string;
 }
@@ -26,6 +28,7 @@ const validation : any = Yup.object().shape({
     name: Yup.string().required("O campo Nome é obrigatório"),
     contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
     valor: Yup.number().required("O campo Valor é obrigatório"),
+    payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
 });
 
 export function AddClient() {
@@ -36,7 +39,9 @@ export function AddClient() {
         contact2: '', 
         peso: '', 
         objetivo: '', 
-        date: '2020-01-01',
+        payDay: '',
+        prefTime: '',
+        birthDate: '',
         physicalActivity: false,
         valor: '',
     };
@@ -63,12 +68,13 @@ export function AddClient() {
                     placeholder="Nome Completo ( Obrigatório )"
                     style={globalStyles.input}
                 />
-                <TextInput
-                    onChangeText={handleChange('contact1')}
-                    onBlur={handleBlur('contact1')}
-                    value={values.contact1}
-                    placeholder="Professor"
-                    style={globalStyles.input}
+                <DatePicker 
+                    title="Data de Nascimento"
+                    iconName="activity"
+                    mode="date"
+                    docId="birthDate"
+                    value={values.birthDate}
+                    setFieldValue={setFieldValue} 
                 />
                 <TextInput
                     keyboardType = 'numeric'
@@ -78,7 +84,7 @@ export function AddClient() {
                     placeholder="Contato 1 ( Obrigatório )"
                     style={globalStyles.input}
                 />
-                {/* <TextInput
+                <TextInput
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
@@ -93,7 +99,7 @@ export function AddClient() {
                     value={values.peso}
                     placeholder="Peso"
                     style={globalStyles.input}
-                /> */}
+                />
                 <TextInput
                     onChangeText={handleChange('objetivo')}
                     onBlur={handleBlur('objetivo')}
@@ -106,21 +112,23 @@ export function AddClient() {
                     onChangeText={handleChange('valor')}
                     onBlur={handleBlur('valor')}
                     value={values.valor}
-                    placeholder="Valor pago"
+                    placeholder="Valor pago ( Obrigatorio )"
                     style={globalStyles.input}
                 />              
                 <DatePicker 
                     title="Data de Pagamento"
                     iconName="calendar"
                     mode="date"
-                    value={values.date}
+                    docId="payDay"
+                    value={values.payDay}
                     setFieldValue={setFieldValue} 
                 />
                 <DatePicker 
                     title="Horário de preferência"
                     iconName="clock"
                     mode="time"
-                    value={values.date}
+                    docId="prefTime"
+                    value={values.prefTime}
                     setFieldValue={setFieldValue} 
                 />
                 
@@ -133,6 +141,7 @@ export function AddClient() {
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
                     {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}
                     {errors.valor && touched.valor && <Text style={globalStyles.error}>{errors.valor}</Text>}
+                    {errors.payDay && touched.payDay && <Text style={globalStyles.error}>{errors.payDay}</Text>}
                 </View>
 
                 <TouchableOpacity >

@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        paddingBottom: 10,
-        paddingTop: 10,
+        paddingBottom: 5,
+        paddingTop: 7,
     },
     datePickerButton: {
         borderRadius: 2,

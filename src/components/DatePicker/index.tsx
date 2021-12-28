@@ -7,10 +7,11 @@ import Icon from 'react-native-vector-icons/Feather';
  
 interface dateProps {
     title?: string;
-    iconName?: string;
+    iconName?: any;
     mode?: any;
     value: Date;
     setFieldValue: any;
+    docId: any;
 }
 
 interface dateTime {
@@ -37,7 +38,7 @@ const TimeComponent : any = (props: dateTime) => {
 }
 
 export function DatePicker (props: dateProps) {
-  const { title, iconName, mode, value, setFieldValue } = props;
+  const { title, iconName, mode, value, setFieldValue, docId } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
   const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date())
   
@@ -48,9 +49,9 @@ export function DatePicker (props: dateProps) {
     setCurrentDateTime(new Date(date.toLocaleString()));
     hideDatePicker();
   }
-
+  
   useEffect(() => {
-    setFieldValue('date', currentDateTime);
+    setFieldValue(docId, currentDateTime);
   }, [currentDateTime])
 
   return (
@@ -58,7 +59,7 @@ export function DatePicker (props: dateProps) {
 
       <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>
           <View style={dateStyle.iconWrap}>
-            <Icon name="calendar" style={dateStyle.icon}/>
+            <Icon name={iconName} style={dateStyle.icon}/>
           </View>
           <View style={dateStyle.infoWrap}>
             <Text style={dateStyle.title}>{title}</Text>
@@ -68,7 +69,6 @@ export function DatePicker (props: dateProps) {
             }
           </View>
       </TouchableOpacity>
-      
       
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

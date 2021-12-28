@@ -97,6 +97,13 @@ export function SingleClient({ navigation, route}: any) {
                     handleSubmit={handleSubmit} 
                     handleChange={handleChange}
                 /> */}
+                  <DatePicker 
+                    title="Data de Pagamento"
+                    iconName="calendar"
+                    mode="date"
+                    value={values.date}
+                    setFieldValue={setFieldValue} 
+                />
                 <CheckBox 
                     values={values}
                     setFieldValue={setFieldValue} 
