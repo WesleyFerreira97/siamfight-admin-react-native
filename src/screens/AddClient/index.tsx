@@ -110,9 +110,16 @@ export function AddClient() {
                     style={globalStyles.input}
                 />              
                 <DatePicker 
-                    title="Pagamento"
+                    title="Data de Pagamento"
                     iconName="calendar"
                     mode="date"
+                    value={values.date}
+                    setFieldValue={setFieldValue} 
+                />
+                <DatePicker 
+                    title="Horário de preferência"
+                    iconName="clock"
+                    mode="time"
                     value={values.date}
                     setFieldValue={setFieldValue} 
                 />

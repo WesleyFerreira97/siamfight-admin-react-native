@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { styles } from './style'; 
-import { Button } from 'react-native-paper';
+import { styles, dateStyle } from './style'; 
+import Icon from 'react-native-vector-icons/Feather';
  
 interface dateProps {
     title?: string;
@@ -19,19 +19,20 @@ interface dateTime {
 
 const DateComponent : any = (props: dateTime) => {
   return (
-    <>
-      <Text style={globalStyles.text}>{props.currentDateTime.getDate()} /</Text> 
-      <Text style={globalStyles.text}>{props.currentDateTime.getMonth() +1} /</Text>
-      <Text style={globalStyles.text}>{props.currentDateTime.getFullYear()}</Text>
-    </>
+    <View style={dateStyle.dateTimeWrap}>
+      <Text style={dateStyle.text}>{props.currentDateTime.getDate()} /</Text> 
+      <Text style={dateStyle.text}>{props.currentDateTime.getMonth() +1} /</Text>
+      <Text style={dateStyle.text}>{props.currentDateTime.getFullYear()}</Text>
+    </View>
   )
 }
 
 const TimeComponent : any = (props: dateTime) => {
   return (
-    <>
-      <Text style={globalStyles.text}>{props.currentDateTime.getHours()}</Text>
-    </>
+    <View style={dateStyle.dateTimeWrap}>
+      <Text style={dateStyle.text}>{props.currentDateTime.getHours()}</Text>
+      <Text style={dateStyle.text}> : {props.currentDateTime.getMinutes()}</Text>
+    </View>
   )
 }
 
@@ -54,20 +55,20 @@ export function DatePicker (props: dateProps) {
 
   return (
     <View style={styles.container}>
-  
-      <Button 
-        icon={iconName} 
-        mode="contained" 
-        onPress={showDatePicker}
-        style={styles.datePickerButton}
-        >
-          <Text style={globalStyles.text}>{title} : &nbsp;</Text>
-        { mode === 'time' 
-          ? <TimeComponent currentDateTime={currentDateTime} /> 
-          : <DateComponent currentDateTime={currentDateTime} />
-         }
-      </Button> 
 
+      <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>
+          <View style={dateStyle.iconWrap}>
+            <Icon name="calendar" style={dateStyle.icon}/>
+          </View>
+          <View style={dateStyle.infoWrap}>
+            <Text style={dateStyle.title}>{title}</Text>
+            { mode === 'time' 
+              ? <TimeComponent currentDateTime={currentDateTime} /> 
+              : <DateComponent currentDateTime={currentDateTime} />
+            }
+          </View>
+      </TouchableOpacity>
+      
       
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -80,3 +81,4 @@ export function DatePicker (props: dateProps) {
    </View>
   )
 }
+
