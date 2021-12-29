@@ -19,15 +19,15 @@ const validation : any = Yup.object().shape({
 
 export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
-    const [cliente, setCliente] = useState<any>({porra: "merda"});
+    const [cliente, setCliente] = useState<any>({});
 
     useEffect( () => {
-        async function rola() {
+        async function teste() {
             await getDocument('cliente', route.params.id).then(data => {
                 setCliente(data);
             });
         }
-        rola();
+        teste();
         
     }, [route.params.id]);
 
@@ -44,11 +44,12 @@ export function SingleClient({ navigation, route}: any) {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                  <ScrollView>
+                     {console.log(values)}
                 <TextInput
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                     value={cliente.name}
-                    placeholder="Nome"
+                    defaultValue={cliente.name}
+                    placeholder={"Nome"}
                     left={<TextInput.Affix text="Nome :" />}
                     style={globalStyles.input}
                 />
@@ -64,7 +65,7 @@ export function SingleClient({ navigation, route}: any) {
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
-                    value={cliente.contact1}
+                    defaultValue={cliente.contact1}
                     placeholder="Contato 1 ( Obrigatório )"
                     left={<TextInput.Affix text="Contato 1 : " />}
                     style={globalStyles.input}
@@ -73,7 +74,7 @@ export function SingleClient({ navigation, route}: any) {
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
-                    value={cliente.contact2}
+                    defaultValue={cliente.contact2}
                     placeholder="Contato 2"
                     left={<TextInput.Affix text="Contato 2 : " />}
                     style={globalStyles.input}
@@ -82,7 +83,7 @@ export function SingleClient({ navigation, route}: any) {
                     keyboardType = 'numeric'
                     onChangeText={handleChange('peso')}
                     onBlur={handleBlur('peso')}
-                    value={cliente.peso}
+                    defaultValue={cliente.peso}
                     left={<TextInput.Affix text="Peso (kg): " />}
                     placeholder="Peso"
                     style={globalStyles.input}
@@ -90,7 +91,7 @@ export function SingleClient({ navigation, route}: any) {
                 <TextInput
                     onChangeText={handleChange('objetivo')}
                     onBlur={handleBlur('objetivo')}
-                    value={cliente.objetivo}
+                    defaultValue={cliente.objetivo}
                     placeholder="Objetivo"
                     left={<TextInput.Affix text="Objetivo : " />}
                     style={globalStyles.input}
@@ -99,7 +100,7 @@ export function SingleClient({ navigation, route}: any) {
                     keyboardType = 'numeric'
                     onChangeText={handleChange('valor')}
                     onBlur={handleBlur('valor')}
-                    value={cliente.valor}
+                    defaultValue={cliente.valor}
                     placeholder="Valor pago"
                     left={<TextInput.Affix text="Valor Pago : R$" />}
                     style={globalStyles.input}
