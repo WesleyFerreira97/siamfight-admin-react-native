@@ -10,7 +10,7 @@ export function SearchClient({ navigation, route }: any) {
   const [search, setSearch] = useState('');
   const [allClients, setAllClients] = useState<any[]>([]);
   const [clientes , setClientes] = useState<any[]>([]);
-  const [triggerGetData, setTriggerGetData] = useState('');
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const onChangeSearch = (query: any) => setSearch(query);
 
@@ -24,21 +24,20 @@ export function SearchClient({ navigation, route }: any) {
     newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
     setClientes(newList);
   }
-
+    
   useEffect(() => {
-    if(route.params) {
+    if(route.params?.addNotification) {
+      setNotificationMessage(route.params.addNotification);
       onToggleSnackBar();
-      // Trigger for useEffect > getData()
-      setTriggerGetData(route.params.name);
+    }
+    if(route.params?.deleteNotification) {
+      setNotificationMessage(route.params.deleteNotification);
+      onToggleSnackBar();
     }
 
+    getData('cliente').then(data => { setAllClients(data as never) });
   }, [route.params]);
 
-  useEffect(() => {
-      // Get Data from Database
-      getData('cliente').then(data => { setAllClients(data as never) });
-  }, [triggerGetData]); 
- 
   useEffect(() => {
     if(search === '') {
       return listAsc(allClients);
@@ -78,7 +77,7 @@ export function SearchClient({ navigation, route }: any) {
             }}
             style={ styles.snackBar }
             >
-              <Text style={styles.snackBarText}>Cliente registrado !</Text>
+              <Text style={styles.snackBarText}>{notificationMessage}</Text>
           </Snackbar>
         </View>
     </View> 

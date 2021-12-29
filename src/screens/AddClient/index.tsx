@@ -25,10 +25,10 @@ interface MyValues  {
 }
 
 const validation : any = Yup.object().shape({
-    name: Yup.string().required("O campo Nome é obrigatório"),
-    contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
-    valor: Yup.number().required("O campo Valor é obrigatório"),
-    payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
+    // name: Yup.string().required("O campo Nome é obrigatório"),
+    // contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
+    // valor: Yup.number().required("O campo Valor é obrigatório"),
+    // payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
 });
 
 export function AddClient() {
@@ -55,7 +55,7 @@ export function AddClient() {
                 onSubmit={ (values, {resetForm }) => {
                     addData('cliente', values);
                     resetForm();
-                    navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
+                    navigation.navigate('Search' , { screen: 'SearchClient', params: { addNotification: "Cliente Adicionado !" }});
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, validateForm, touched  }) => (
                 <ScrollView>
