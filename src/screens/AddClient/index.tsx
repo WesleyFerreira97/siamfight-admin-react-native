@@ -41,7 +41,7 @@ export function AddClient() {
         objetivo: '', 
         payDay: new Date(),
         prefTime: new Date('August 19, 2002 05:00:00'),
-        birthDate: new Date('2018-10-2'),
+        birthDate: new Date('August 19, 2002 05:00:00'),
         physicalActivity: false,
         valor: '',
     };

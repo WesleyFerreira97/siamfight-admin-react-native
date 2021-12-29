@@ -19,6 +19,7 @@ interface dateTime {
 }
 
 const DateComponent : any = (props: dateTime) => {
+  
   return (
     <View style={dateStyle.dateTimeWrap}>
       <Text style={dateStyle.text}>{props.currentDateTime.getDate()} /</Text> 
@@ -55,7 +56,7 @@ export function DatePicker (props: dateProps) {
   }, []);
 
   useEffect(() => {
-      setFieldValue(fieldId, currentDateTime.toLocaleDateString());
+      setFieldValue(fieldId, currentDateTime.toLocaleString());
   }, [currentDateTime]);
   
   return (
