@@ -82,7 +82,10 @@ export function SearchClient({ navigation, route }: any) {
         </View>
     </View> 
     ) 
-}
+}    
+
+
+
 
 
   
