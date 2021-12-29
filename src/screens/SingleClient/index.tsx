@@ -19,19 +19,21 @@ const validation : any = Yup.object().shape({
 
 export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
-    const [cliente, setCliente] = useState<any>({});
+    const [cliente, setCliente] = useState<any>({porra: "merda"});
 
     useEffect( () => {
-        getDocument('cliente', route.params.id).then(data => {
-            setCliente(data);
-        });
+        async function rola() {
+            await getDocument('cliente', route.params.id).then(data => {
+                setCliente(data);
+            });
+        }
+        rola();
+        
     }, [route.params.id]);
-    
-    
+
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cliente </Text>
-            {console.log(cliente)}
             <Text style={globalStyles.title}>{route.params.name}</Text>
             <Formik
                 validationSchema={validation}
@@ -45,18 +47,17 @@ export function SingleClient({ navigation, route}: any) {
                 <TextInput
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                    value={cliente.name}
+                     value={cliente.name}
                     placeholder="Nome"
                     left={<TextInput.Affix text="Nome :" />}
                     style={globalStyles.input}
                 />
-                {console.log(cliente.birthDate, 'BirthDateeee')}
                 <DatePicker 
                     title="Data de Nascimento"
                     iconName="activity"
                     mode="date"
                     fieldId="birthDate"
-                    value={values.birthDate}
+                    value={route.params.birthDate}
                     setFieldValue={setFieldValue} 
                 />
                 <TextInput
@@ -103,18 +104,20 @@ export function SingleClient({ navigation, route}: any) {
                     left={<TextInput.Affix text="Valor Pago : R$" />}
                     style={globalStyles.input}
                 />
-                {/* <DatePicker 
-                    value={values}
-                    setFieldValue={setFieldValue} 
-                    handleSubmit={handleSubmit} 
-                    handleChange={handleChange}
-                /> */}
-                <DatePicker     
-                    title="Data de Nascimento"
-                    iconName="activity"
+                <DatePicker 
+                    title="Data de Pagamento"
+                    iconName="calendar"
                     mode="date"
-                    fieldId="birthDate"
-                    value={values.birthDate}
+                    fieldId="payDay"
+                    value={route.params.payDay}
+                    setFieldValue={setFieldValue} 
+                />
+                <DatePicker 
+                    title="Horário de preferência"
+                    iconName="clock"
+                    mode="time"
+                    fieldId="prefTime"
+                    value={route.params.prefTime}
                     setFieldValue={setFieldValue} 
                 />
                 <CheckBox 

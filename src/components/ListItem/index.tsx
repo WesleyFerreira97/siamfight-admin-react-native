@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/core';
 
 export function ListItem({cliente}: any) {
     const navigation : any = useNavigation();
-
+  
     return (
       <View style={styles.form}>
         <TouchableOpacity onPress={() => navigation.navigate('SingleClient', cliente)}>

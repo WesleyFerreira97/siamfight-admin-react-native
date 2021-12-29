@@ -50,27 +50,18 @@ export function DatePicker (props: dateProps) {
     hideDatePicker();
   }
   
-  // useEffect(() => {
-  //   async function takipariu() {
-  //     setCurrentDateTime(new Date(value.toLocaleDateString()));
-  //   }
-  //   takipariu();
-  // }, []);
+  useEffect(() => {
+      setCurrentDateTime(new Date(value));
+  }, []);
 
-  
-  // useEffect(() => {
-  //   async function porra() {
-  //     setFieldValue(fieldId, currentDateTime);
-  //   }
-  //   porra();
-  // }, [currentDateTime]);
-  
-  
+  useEffect(() => {
+      setFieldValue(fieldId, currentDateTime.toLocaleDateString());
+  }, [currentDateTime]);
   
   return (
     <View style={styles.container}>
-      {console.log(props, 'valueeee')}
       <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>
+
           <View style={dateStyle.iconWrap}>
             <Icon name={iconName} style={dateStyle.icon}/>
           </View>
@@ -81,15 +72,16 @@ export function DatePicker (props: dateProps) {
               : <DateComponent currentDateTime={currentDateTime} />
             }
           </View>
+          
       </TouchableOpacity>
-      
+
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={mode}
         locale="pt_BR"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        date={value}
+        date={currentDateTime}
       />
    </View>
   )
