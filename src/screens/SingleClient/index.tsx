@@ -62,8 +62,8 @@ export function SingleClient({ navigation, route}: any) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Cliente </Text>
-            <Text style={globalStyles.title}>{route.params.name}</Text>
+            <Text style={globalStyles.title}>Cliente {route.params.name} </Text>
+            {/* <Text style={globalStyles.title}>{route.params.name}</Text> */}
             <Formik
                 // validationSchema={validation}
                 initialValues={cliente}
@@ -76,11 +76,10 @@ export function SingleClient({ navigation, route}: any) {
                 <ScrollView>
                 <SfTextInput 
                     label={"Nome"}
-                    value={values.name || cliente.name}
                     placeholder="Nome"
+                    value={values.name || cliente.name}
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                    
                 />
                 <DatePicker 
                     title="Data de Nascimento"
@@ -90,69 +89,45 @@ export function SingleClient({ navigation, route}: any) {
                     value={route.params.birthDate}
                     setFieldValue={setFieldValue} 
                 />
-                <TextInput
+                <SfTextInput 
                     label={"Contato 1"}
-                    mode="outlined"
                     value={values.contact1 || cliente.contact1}
-                    activeOutlineColor='#3BBC92'
-                    underlineColor='#fff'
-                    selectionColor='#000'
-                    dense={true}
-                    keyboardType = 'numeric'
+                    placeholder="Contato 1"
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
-                    placeholder="Contato 1 ( Obrigatório )"
-                    style={globalStyles.inputXl}
-                    theme={{
-                        // roundness: 10,
-                        colors: {
-                            primary:'green',
-                            text: '#fff',
-                            placeholder: '#fff',
-                        }
-                      }}
-                />
-                <Text style={globalStyles.qq}>Contato 2</Text>
-                <TextInput
-                    mode="outlined"
                     keyboardType = 'numeric'
+                />
+                <SfTextInput 
+                    label={"Contato 2"}
+                    value={values.contact2 || cliente.contact2}
+                    placeholder="Contato 2"
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
-                    defaultValue={cliente.contact2}
-                    placeholder="Contato 2"
-                    style={globalStyles.input}
-                />
-                <Text style={globalStyles.qq}>Peso</Text>
-                <TextInput
-                    mode="outlined"
                     keyboardType = 'numeric'
+                />
+                <SfTextInput 
+                    label={"Peso"}
+                    value={values.peso || cliente.peso}
+                    placeholder="Peso"
                     onChangeText={handleChange('peso')}
                     onBlur={handleBlur('peso')}
-                    defaultValue={cliente.peso}
-                    left={<TextInput.Affix text="(kg): " />}
-                    placeholder="Peso"
-                    style={globalStyles.input}
+                    keyboardType = 'numeric'
                 />
-                <Text style={globalStyles.qq}>Objetivo</Text>
-                <TextInput
-                    mode="outlined"
+                <SfTextInput 
+                    label={"Objetivo"}
+                    value={values.objetivo || cliente.objetivo}
+                    placeholder="Objetivo"
                     onChangeText={handleChange('objetivo')}
                     onBlur={handleBlur('objetivo')}
-                    defaultValue={cliente.objetivo}
-                    placeholder="Objetivo"
-                    left={<TextInput.Affix text="Objetivo : " />}
-                    style={globalStyles.input}
+                    multiline={true}
                 />
-                <Text style={globalStyles.qq}>Valor</Text>
-                <TextInput
-                    mode="outlined"
-                    keyboardType = 'numeric'
+                <SfTextInput 
+                    label={"Valor Pago"}
+                    value={values.valor || cliente.valor}
+                    placeholder="Valor Pago (R$)"
                     onChangeText={handleChange('valor')}
                     onBlur={handleBlur('valor')}
-                    defaultValue={cliente.valor}
-                    placeholder="Valor pago"
-                    left={<TextInput.Affix text="Valor Pago : R$" />}
-                    style={globalStyles.input}
+                    keyboardType = 'numeric'
                 />
                 <DatePicker 
                     title="Data de Pagamento"

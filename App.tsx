@@ -24,7 +24,7 @@ function SearchStack() {
       <HomeStack.Screen name="SearchClient" component={SearchClient} />
       <HomeStack.Screen name="SingleClient" component={SingleClient} />
     </HomeStack.Navigator>
-);
+  );
 }
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
     <StatusBar backgroundColor="#1A1A2E" />
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="PaymentDates"
+        initialRouteName="Search"
         barStyle={{ 
           backgroundColor: '#C70039', 
           padding: 2

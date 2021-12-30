@@ -7,7 +7,8 @@ export function SfTextInput(props: any) {
         <TextInput
         {...props}
         style={styles.input}
-        activeOutlineColor='#3BBC92'
+        outlineColor='#3BBC92'
+        activeOutlineColor='#fff'
         underlineColor='#fff'
         selectionColor='#000'
         dense={true}

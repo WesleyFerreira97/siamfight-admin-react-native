@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
 import { Formik, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
+import { SfTextInput } from './../../components/TextInput/index';
 
 interface MyValues  {
   name: string;
@@ -22,6 +23,7 @@ interface MyValues  {
   birthDate: any;
   physicalActivity: boolean;
   valor: string;
+  statusClient: boolean;
 }
 
 const validation : any = Yup.object().shape({
@@ -44,6 +46,7 @@ export function AddClient() {
         birthDate: new Date('August 19, 2002 05:00:00'),
         physicalActivity: false,
         valor: '',
+        statusClient: true,
     };
 
     return (
@@ -59,12 +62,12 @@ export function AddClient() {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, validateForm, touched  }) => (
                 <ScrollView>
-                <TextInput
+                <SfTextInput 
+                    label={"Nome"}
+                    placeholder="Nome"
+                    value={values.name}
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                    value={values.name}
-                    placeholder="Nome Completo ( Obrigatório )"
-                    style={globalStyles.input}
                 />
                 <DatePicker 
                     title="Data de Nascimento"
@@ -74,45 +77,46 @@ export function AddClient() {
                     value={values.birthDate}
                     setFieldValue={setFieldValue} 
                 />
-                <TextInput
-                    keyboardType = 'numeric'
+                <SfTextInput 
+                    label={"Contato 1"}
+                    value={values.contact1 }
+                    placeholder="Contato 1 ( Obrigatório )"
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
-                    value={values.contact1}
-                    placeholder="Contato 1 ( Obrigatório )"
-                    style={globalStyles.input}
-                />
-                <TextInput
                     keyboardType = 'numeric'
+                />
+                <SfTextInput 
+                    label={"Contato 2"}
+                    value={values.contact2 }
+                    placeholder="Contato 2"
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
-                    value={values.contact2}
-                    placeholder="Contato 2"
-                    style={globalStyles.input}
-                />
-                <TextInput
                     keyboardType = 'numeric'
+                />
+                <SfTextInput 
+                    label={"Peso (Kg)"}
+                    value={values.peso }
+                    placeholder="Peso"
                     onChangeText={handleChange('peso')}
                     onBlur={handleBlur('peso')}
-                    value={values.peso}
-                    placeholder="Peso"
-                    style={globalStyles.input}
+                    keyboardType = 'numeric'
                 />
-                <TextInput
-                    onChangeText={handleChange('objetivo')}
-                    onBlur={handleBlur('objetivo')}
+                <SfTextInput 
+                    label={"Objetivo"}
                     value={values.objetivo}
                     placeholder="Objetivo"
-                    style={globalStyles.input}
+                    onChangeText={handleChange('objetivo')}
+                    onBlur={handleBlur('objetivo')}
+                    multiline={true}
                 />
-                <TextInput
-                    keyboardType = 'numeric'
+                <SfTextInput 
+                    label={"Valor Pago"}
+                    value={values.valor}
+                    placeholder="Valor Pago (R$)"
                     onChangeText={handleChange('valor')}
                     onBlur={handleBlur('valor')}
-                    value={values.valor}
-                    placeholder="Valor pago ( Obrigatorio )"
-                    style={globalStyles.input}
-                />              
+                    keyboardType = 'numeric'
+                />
                 <DatePicker 
                     title="Data de Pagamento"
                     iconName="calendar"
@@ -129,12 +133,19 @@ export function AddClient() {
                     value={values.prefTime}
                     setFieldValue={setFieldValue} 
                 />
-                
                 {/* <CheckBox 
-                    value={values}
+                    title="Pratica Atividade Fisica"
+                    fieldId="physicalActivity"
+                    value={values.physicalActivity}
+                    setFieldValue={setFieldValue} 
+                />
+                 <CheckBox
+                    title="Cliente Ativo?" 
+                    fieldId="statusClient"
+                    value={values.statusClient}
                     setFieldValue={setFieldValue} 
                 /> */}
-
+                {console.log('vaisefu')}
                 <View style={globalStyles.errorWrap}>
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
                     {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}
