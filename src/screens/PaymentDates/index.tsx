@@ -7,6 +7,7 @@ import { ListPayment } from '../../components/ListPayment';
 
 export function PaymentDates() {
   const [allClients, setAllClients] = useState<any[]>([]);
+console.log(allClients);
 
   useEffect(() => {
     // Get Data from Database

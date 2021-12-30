@@ -33,5 +33,12 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingLeft: 13,
     },
+    text: {
+        color: '#fff',
+    },
+    dateWrap: {
+        display: 'flex',
+        flexDirection: 'row',
+    }
     
 })

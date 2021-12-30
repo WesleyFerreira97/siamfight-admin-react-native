@@ -130,10 +130,10 @@ export function AddClient() {
                     setFieldValue={setFieldValue} 
                 />
                 
-                <CheckBox 
+                {/* <CheckBox 
                     value={values}
                     setFieldValue={setFieldValue} 
-                />
+                /> */}
 
                 <View style={globalStyles.errorWrap}>
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
