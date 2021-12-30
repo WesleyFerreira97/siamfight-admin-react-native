@@ -11,7 +11,7 @@ interface dateProps {
     mode?: any;
     value: Date;
     setFieldValue: any;
-    docId: any;
+    fieldId: any;
 }
 
 interface dateTime {
@@ -19,6 +19,7 @@ interface dateTime {
 }
 
 const DateComponent : any = (props: dateTime) => {
+  
   return (
     <View style={dateStyle.dateTimeWrap}>
       <Text style={dateStyle.text}>{props.currentDateTime.getDate()} /</Text> 
@@ -38,7 +39,7 @@ const TimeComponent : any = (props: dateTime) => {
 }
 
 export function DatePicker (props: dateProps) {
-  const { title, iconName, mode, value, setFieldValue, docId } = props;
+  const { title, iconName, mode, value, setFieldValue, fieldId } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
   const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date())
   
@@ -51,13 +52,17 @@ export function DatePicker (props: dateProps) {
   }
   
   useEffect(() => {
-    setFieldValue(docId, currentDateTime);
-  }, [currentDateTime])
+      setCurrentDateTime(new Date(value));
+  }, []);
 
+  useEffect(() => {
+      setFieldValue(fieldId, currentDateTime.toLocaleString());
+  }, [currentDateTime]);
+  
   return (
     <View style={styles.container}>
-
       <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>
+
           <View style={dateStyle.iconWrap}>
             <Icon name={iconName} style={dateStyle.icon}/>
           </View>
@@ -68,15 +73,16 @@ export function DatePicker (props: dateProps) {
               : <DateComponent currentDateTime={currentDateTime} />
             }
           </View>
+          
       </TouchableOpacity>
-      
+
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={mode}
         locale="pt_BR"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        // date={value}
+        date={currentDateTime}
       />
    </View>
   )

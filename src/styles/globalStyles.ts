@@ -20,12 +20,11 @@ export const globalStyles = StyleSheet.create( {
         color: '#fff',
     },
     input: {
-        height: 27,
+        height: 45,
         marginTop: 5,
         marginBottom: 5,
         backgroundColor: '#fff',
         borderRadius: 5,
-        padding: 7,
     },
     inputSmall: {
         height: 25,

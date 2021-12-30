@@ -25,10 +25,10 @@ interface MyValues  {
 }
 
 const validation : any = Yup.object().shape({
-    name: Yup.string().required("O campo Nome é obrigatório"),
-    contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
-    valor: Yup.number().required("O campo Valor é obrigatório"),
-    payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
+    // name: Yup.string().required("O campo Nome é obrigatório"),
+    // contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
+    // valor: Yup.number().required("O campo Valor é obrigatório"),
+    // payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
 });
 
 export function AddClient() {
@@ -39,9 +39,9 @@ export function AddClient() {
         contact2: '', 
         peso: '', 
         objetivo: '', 
-        payDay: '',
-        prefTime: '',
-        birthDate: '',
+        payDay: new Date(),
+        prefTime: new Date('August 19, 2002 05:00:00'),
+        birthDate: new Date('August 19, 2002 05:00:00'),
         physicalActivity: false,
         valor: '',
     };
@@ -53,11 +53,9 @@ export function AddClient() {
                 validationSchema={validation}
                 initialValues={initialValues}
                 onSubmit={ (values, {resetForm }) => {
-                    console.log('onSubmit');
-                    
                     addData('cliente', values);
                     resetForm();
-                    navigation.navigate('Search' , { screen: 'SearchClient', params: { name: values.name }});
+                    navigation.navigate('Search' , { screen: 'SearchClient', params: { addNotification: "Cliente Adicionado !" }});
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, validateForm, touched  }) => (
                 <ScrollView>
@@ -72,7 +70,7 @@ export function AddClient() {
                     title="Data de Nascimento"
                     iconName="activity"
                     mode="date"
-                    docId="birthDate"
+                    fieldId="birthDate"
                     value={values.birthDate}
                     setFieldValue={setFieldValue} 
                 />
@@ -119,7 +117,7 @@ export function AddClient() {
                     title="Data de Pagamento"
                     iconName="calendar"
                     mode="date"
-                    docId="payDay"
+                    fieldId="payDay"
                     value={values.payDay}
                     setFieldValue={setFieldValue} 
                 />
@@ -127,7 +125,7 @@ export function AddClient() {
                     title="Horário de preferência"
                     iconName="clock"
                     mode="time"
-                    docId="prefTime"
+                    fieldId="prefTime"
                     value={values.prefTime}
                     setFieldValue={setFieldValue} 
                 />
