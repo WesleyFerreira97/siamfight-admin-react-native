@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
+import { View, Text, ScrollView, Button, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
 import { getDocument, deleteClient } from '../../services/firebaseFunctions';
@@ -9,11 +9,6 @@ import * as Yup from 'yup';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
 import { styles } from './style';
-
-
-// import { db } from '../../services/firebaseconfig';
-// import { addDoc, collection, getDocs, doc, getDoc, deleteDoc } from 'firebase/firestore/lite';
-// deleteDoc(doc(db, 'cliente', 'OhL8LymdE5fDF9chpEVX'));
 
 const validation : any = Yup.object().shape({
     name: Yup.string().required("O campo Nome é obrigatório"),
@@ -26,6 +21,22 @@ export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
     const [cliente, setCliente] = useState<any>({});
 
+    const deleteClientModal = () =>
+    Alert.alert(
+      "Deletar REGISTRO de Cliente",
+      "Você deseja realmente excluir este Cliente?. Esta ação não poderá ser desfeita!",
+      [
+        { text: "Excluir", onPress: () => deleteCurrentClient('cliente', route.params.id) },
+        { text: "", onPress: () => deleteCurrentClient('cliente', route.params.id) },
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+      ],
+      {cancelable: true}
+    );
+
     useEffect( () => {
         async function teste() {
             await getDocument('cliente', route.params.id).then(data => {
@@ -35,11 +46,9 @@ export function SingleClient({ navigation, route}: any) {
         teste();
         
     }, [route.params.id]);
-    const ex = {ex1: 'ex1', ex2: 'ex2', ex3: 'ex3'};
-    async function vaitomarnocu(collectionName: string, id: string) {
+
+    async function deleteCurrentClient(collectionName: string, id: string) {
         await deleteClient(collectionName, id).then(data => {
-            // navigation.goBack();
-            // navigation.navigate("SearchClient", ex);
             navigation.navigate('Search' , { screen: 'SearchClient', params: { deleteNotification: "Cliente Deletado !" }});
         });
     }
@@ -56,8 +65,7 @@ export function SingleClient({ navigation, route}: any) {
                     resetForm();
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
-                 <ScrollView>
-                     {console.log(values)}
+                <ScrollView>
                 <TextInput
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
@@ -147,7 +155,7 @@ export function SingleClient({ navigation, route}: any) {
                 )}
                 </Formik>
 
-            <Button title="Deletar Cliente" onPress={()=> vaitomarnocu('cliente', route.params.id)} />
+            <Button title={"2-Button Alert"} onPress={deleteClientModal} />
         </View>
     )
 }

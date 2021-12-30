@@ -39,8 +39,6 @@ export async function getDocument( collectionName: string , docID: string) {
     }
 }
 
-
-
 export async function deleteClient(collectionName: string , id: string ) {
     const docItem = doc(db, collectionName, id);
     try {
