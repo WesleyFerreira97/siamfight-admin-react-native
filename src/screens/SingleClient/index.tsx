@@ -9,6 +9,8 @@ import * as Yup from 'yup';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
 import { styles } from './style';
+import { SfTextInput } from './../../components/TextInput/index';
+import { string } from 'yup/lib/locale';
 
 const validation : any = Yup.object().shape({
     name: Yup.string().required("O campo Nome é obrigatório"),
@@ -57,7 +59,7 @@ export function SingleClient({ navigation, route}: any) {
             navigation.navigate('Search' , { screen: 'SearchClient', params: { updateNotification: "Cliente Atualizado !" }});
         });
     }
-    
+
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cliente </Text>
@@ -72,13 +74,13 @@ export function SingleClient({ navigation, route}: any) {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <ScrollView>
-                <TextInput
+                <SfTextInput 
+                    label={"Nome"}
+                    value={values.name || cliente.name}
+                    placeholder="Nome"
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                    defaultValue={cliente.name}
-                    placeholder={"Nome"}
-                    left={<TextInput.Affix text="Nome :" />}
-                    style={globalStyles.input}
+                    
                 />
                 <DatePicker 
                     title="Data de Nascimento"
@@ -89,33 +91,51 @@ export function SingleClient({ navigation, route}: any) {
                     setFieldValue={setFieldValue} 
                 />
                 <TextInput
+                    label={"Contato 1"}
+                    mode="outlined"
+                    value={values.contact1 || cliente.contact1}
+                    activeOutlineColor='#3BBC92'
+                    underlineColor='#fff'
+                    selectionColor='#000'
+                    dense={true}
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact1')}
                     onBlur={handleBlur('contact1')}
-                    defaultValue={cliente.contact1}
                     placeholder="Contato 1 ( Obrigatório )"
-                    left={<TextInput.Affix text="Contato 1 : " />}
-                    style={globalStyles.input}
+                    style={globalStyles.inputXl}
+                    theme={{
+                        // roundness: 10,
+                        colors: {
+                            primary:'green',
+                            text: '#fff',
+                            placeholder: '#fff',
+                        }
+                      }}
                 />
+                <Text style={globalStyles.qq}>Contato 2</Text>
                 <TextInput
+                    mode="outlined"
                     keyboardType = 'numeric'
                     onChangeText={handleChange('contact2')}
                     onBlur={handleBlur('contact2')}
                     defaultValue={cliente.contact2}
                     placeholder="Contato 2"
-                    left={<TextInput.Affix text="Contato 2 : " />}
                     style={globalStyles.input}
                 />
+                <Text style={globalStyles.qq}>Peso</Text>
                 <TextInput
+                    mode="outlined"
                     keyboardType = 'numeric'
                     onChangeText={handleChange('peso')}
                     onBlur={handleBlur('peso')}
                     defaultValue={cliente.peso}
-                    left={<TextInput.Affix text="Peso (kg): " />}
+                    left={<TextInput.Affix text="(kg): " />}
                     placeholder="Peso"
                     style={globalStyles.input}
                 />
+                <Text style={globalStyles.qq}>Objetivo</Text>
                 <TextInput
+                    mode="outlined"
                     onChangeText={handleChange('objetivo')}
                     onBlur={handleBlur('objetivo')}
                     defaultValue={cliente.objetivo}
@@ -123,7 +143,9 @@ export function SingleClient({ navigation, route}: any) {
                     left={<TextInput.Affix text="Objetivo : " />}
                     style={globalStyles.input}
                 />
+                <Text style={globalStyles.qq}>Valor</Text>
                 <TextInput
+                    mode="outlined"
                     keyboardType = 'numeric'
                     onChangeText={handleChange('valor')}
                     onBlur={handleBlur('valor')}

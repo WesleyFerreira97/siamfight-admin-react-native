@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, ScrollView, TouchableOpacity } from "react-native";
-import { Formik, ErrorMessage, FieldArray } from 'formik';
-import * as Yup from 'yup';
+import { TextInput } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
-import { TextInput } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
+import { Formik, ErrorMessage, FieldArray } from 'formik';
+import * as Yup from 'yup';
 
 interface MyValues  {
   name: string;

@@ -19,10 +19,16 @@ export const globalStyles = StyleSheet.create( {
     text: {
         color: '#fff',
     },
+    inputXl: {
+        marginTop: 7,
+        marginBottom: 7,
+        backgroundColor: '#1A1A2E',
+        color: '#fff',
+    },
     input: {
-        height: 45,
-        marginTop: 5,
-        marginBottom: 5,
+        height: 40,
+        marginTop: 7,
+        marginBottom: 7,
         backgroundColor: '#fff',
         borderRadius: 5,
     },
@@ -51,5 +57,13 @@ export const globalStyles = StyleSheet.create( {
         color: '#C70039',
         lineHeight: 22,
         fontSize: 15,
+    },
+    qq: {
+        color: '#3BBC92',
+        fontWeight: '600',
+        fontSize: 12,
+        marginTop: 7,
+        marginBottom: -10,
+        marginLeft: 4,
     }
 });
