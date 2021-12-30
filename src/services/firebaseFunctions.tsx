@@ -1,6 +1,10 @@
 import { db } from './firebaseconfig';
 import { getDocFromServer } from "firebase/firestore";
+<<<<<<< HEAD
 import { addDoc, collection, getDocs, doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore/lite';
+=======
+import { addDoc, collection, getDocs, doc, getDoc, deleteDoc } from 'firebase/firestore/lite';
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
 interface Props {
     collectionName: string;
     data: object;
@@ -39,6 +43,7 @@ export async function getDocument( collectionName: string , docID: string) {
     }
 }
 
+<<<<<<< HEAD
 export async function updateClient( collectionName: string , docID: string, dataClient: object ) {
     const docItem = doc(db, collectionName, docID);
     
@@ -51,6 +56,8 @@ export async function updateClient( collectionName: string , docID: string, data
     }
 }
 
+=======
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
 export async function deleteClient(collectionName: string , id: string ) {
     const docItem = doc(db, collectionName, id);
     try {

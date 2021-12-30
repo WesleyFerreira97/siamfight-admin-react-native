@@ -24,7 +24,7 @@ export function SearchClient({ navigation, route }: any) {
     newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
     setClientes(newList);
   }
-
+    
   useEffect(() => {
     if(route.params?.addNotification) {
       setNotificationMessage(route.params.addNotification);

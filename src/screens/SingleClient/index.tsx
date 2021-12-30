@@ -2,7 +2,11 @@ import React, {useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
+<<<<<<< HEAD
 import { getDocument, deleteClient, updateClient } from '../../services/firebaseFunctions';
+=======
+import { getDocument, deleteClient } from '../../services/firebaseFunctions';
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
 import { HeaderScreen  } from '../../components/header';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -22,6 +26,7 @@ export function SingleClient({ navigation, route}: any) {
     const [cliente, setCliente] = useState<any>({});
 
     const deleteClientModal = () =>
+<<<<<<< HEAD
         Alert.alert(
         "Deletar REGISTRO de Cliente",
         "Você deseja realmente excluir este Cliente?. Esta ação não poderá ser desfeita!",
@@ -39,26 +44,56 @@ export function SingleClient({ navigation, route}: any) {
 
     useEffect( () => {
         async function getClient() {
+=======
+    Alert.alert(
+      "Deletar REGISTRO de Cliente",
+      "Você deseja realmente excluir este Cliente?. Esta ação não poderá ser desfeita!",
+      [
+        { text: "Excluir", onPress: () => deleteCurrentClient('cliente', route.params.id) },
+        { text: "", onPress: () => deleteCurrentClient('cliente', route.params.id) },
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+      ],
+      {cancelable: true}
+    );
+
+    useEffect( () => {
+        async function teste() {
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
             await getDocument('cliente', route.params.id).then(data => {
                 setCliente(data);
             });
         }
+<<<<<<< HEAD
         getClient();
+=======
+        teste();
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
         
     }, [route.params.id]);
 
     async function deleteCurrentClient(collectionName: string, id: string) {
+<<<<<<< HEAD
         await deleteClient(collectionName, id).then(() => {
+=======
+        await deleteClient(collectionName, id).then(data => {
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
             navigation.navigate('Search' , { screen: 'SearchClient', params: { deleteNotification: "Cliente Deletado !" }});
         });
     }
 
+<<<<<<< HEAD
     async function updateClientData (updateData: object) {
         updateClient('cliente', route.params.id, updateData).then(() => {
             navigation.navigate('Search' , { screen: 'SearchClient', params: { updateNotification: "Cliente Atualizado !" }});
         });
     }
     
+=======
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cliente </Text>
@@ -158,13 +193,20 @@ export function SingleClient({ navigation, route}: any) {
                     <Button color="#3BBC92" title="Confirmar Alterações" onPress={handleSubmit}/>
                 </View>
                 
+<<<<<<< HEAD
                 <Button color="#C70039" title={"Deletar Cliente"} onPress={deleteClientModal} />
                 
+=======
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
                 </ScrollView>
                 )}
                 </Formik>
 
+<<<<<<< HEAD
             
+=======
+            <Button title={"2-Button Alert"} onPress={deleteClientModal} />
+>>>>>>> 328f29087d6975348d417020dc869e4b0a7c772e
         </View>
     )
 }
