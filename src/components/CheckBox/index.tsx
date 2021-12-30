@@ -5,16 +5,26 @@ import { styles } from '../../screens/SearchClient/style';
 import { globalStyles } from '../../styles/globalStyles';
 globalStyles;
 
+interface Props {
+    title: string;
+    setFieldValue: any;
+    fieldId: string;
+    value: any;
+}
 
-export function CheckBox(props: any) {
-    const { setFieldValue } = props;
+export function CheckBox(props: Props) {
+    const { title, setFieldValue, fieldId, value } = props;
     const [isChecked, setIsChecked] = useState(false);
-    
+
+    useEffect(() => {
+        setIsChecked(value);
+    }, [value]);
+
     useEffect(() => {
         // Send data to form
-        setFieldValue('physicalActivity', isChecked);
+        setFieldValue(fieldId, isChecked);
     }, [isChecked]);
-    
+
     return (
         <View style={globalStyles.checkbox}>
             <Checkbox
@@ -23,7 +33,8 @@ export function CheckBox(props: any) {
                 color='#4ecca3'
                 uncheckedColor='#4ecca3'
             />
-            <Text style={globalStyles.label}>Pratica atividade física</Text>
+            <Text style={globalStyles.label}>{title}</Text>
+            <Text style={globalStyles.label}>{isChecked}</Text>
         </View>
     );
 }
