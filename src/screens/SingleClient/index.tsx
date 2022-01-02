@@ -1,10 +1,10 @@
 import React, {useState, useEffect } from 'react';
-import { View, Text, ScrollView, Button, Alert } from 'react-native';
+import { View, Text, ScrollView, Button, Alert, Switch } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
 import { getDocument, deleteClient, updateClient } from '../../services/firebaseFunctions';
 import { HeaderScreen  } from '../../components/header';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { DatePicker } from './../../components/DatePicker/index';
 import { CheckBox } from '../../components/CheckBox/index';
@@ -22,6 +22,14 @@ const validation : any = Yup.object().shape({
 export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
     const [cliente, setCliente] = useState<any>({});
+    const [isEnabled, setIsEnabled] = useState(false);
+
+    useEffect(() => {
+        // Initial Value
+        setIsEnabled(cliente.physicalActivity);  
+    }, [cliente]);
+
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     const deleteClientModal = () =>
         Alert.alert(
@@ -63,7 +71,6 @@ export function SingleClient({ navigation, route}: any) {
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Cliente {route.params.name} </Text>
-            {/* <Text style={globalStyles.title}>{route.params.name}</Text> */}
             <Formik
                 // validationSchema={validation}
                 initialValues={cliente}
@@ -72,6 +79,12 @@ export function SingleClient({ navigation, route}: any) {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <ScrollView>
+                <Switch
+                    trackColor={{ false: "#fff", true: "#4ecca3" }}
+                    thumbColor={isEnabled ? "#3BBC92" : "#4ecca3"}
+                    onValueChange={(e) => {toggleSwitch(); setFieldValue('physicalActivity', e)}}
+                    value={isEnabled}
+                />
                  <SfTextInput 
                     label={"Nome"}
                     placeholder="Nome"
@@ -143,7 +156,7 @@ export function SingleClient({ navigation, route}: any) {
                     value={route.params.prefTime}
                     setFieldValue={setFieldValue} 
                 />
-                <CheckBox 
+                {/* <CheckBox 
                     title="Pratica Atividade Fisica"
                     fieldId="physicalActivity"
                     value={cliente.physicalActivity}
@@ -154,8 +167,8 @@ export function SingleClient({ navigation, route}: any) {
                     fieldId="statusClient"
                     value={cliente.statusClient}
                     setFieldValue={setFieldValue} 
-                />
-                {console.log('SingleClient')}
+                /> */}
+
                 <View style={globalStyles.button}>
                     <Button color="#3BBC92" title="Confirmar Alterações" onPress={handleSubmit}/>
                 </View>

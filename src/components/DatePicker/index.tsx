@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useCallback} from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
-import { globalStyles } from '../../styles/globalStyles';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { styles, dateStyle } from './style'; 
 import Icon from 'react-native-vector-icons/Feather';
- 
 interface dateProps {
     title?: string;
     iconName?: any;
@@ -13,7 +11,6 @@ interface dateProps {
     setFieldValue: any;
     fieldId: any;
 }
-
 interface dateTime {
     currentDateTime: Date;
 }
@@ -37,7 +34,6 @@ const TimeComponent : any = (props: dateTime) => {
   )
 }
 
-
 export function DatePicker (props: dateProps) {
   const { title, iconName, mode, value, setFieldValue, fieldId } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -52,13 +48,17 @@ export function DatePicker (props: dateProps) {
 
   }, []);
 
-  const handleConfirm = useCallback((date: any) => {
+  function handleConfirm(date: any) {
       setCurrentDateTime(new Date(date.toLocaleString()));
-      setFieldValue(fieldId, currentDateTime.toLocaleString());
-    
+
       hideDatePicker();
-  }, [currentDateTime, isDatePickerVisible]);
-  
+  }
+
+  useEffect(() => {
+      // Send data to form
+      setFieldValue(fieldId, currentDateTime.toLocaleString());
+  }, [currentDateTime]);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={showDatePicker} style={dateStyle.pickerWrap}>

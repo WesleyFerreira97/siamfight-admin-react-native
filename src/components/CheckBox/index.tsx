@@ -5,6 +5,7 @@ import { styles } from '../../screens/SearchClient/style';
 import { globalStyles } from '../../styles/globalStyles';
 globalStyles;
 
+
 interface Props {
     title: string;
     setFieldValue: any;
@@ -15,7 +16,8 @@ interface Props {
 export function CheckBox(props: Props) {
     const { title, setFieldValue, fieldId, value } = props;
     const [isChecked, setIsChecked] = useState(false);
-
+    console.log(props, 'props do checkbox');
+    
     useEffect(() => {
         // Set Initial Value
         setIsChecked(value);
@@ -25,8 +27,9 @@ export function CheckBox(props: Props) {
     const changeValue = useCallback(() => {
         setIsChecked(!isChecked);
         setFieldValue(fieldId, isChecked);
-
-    }, [isChecked]);
+        console.log(isChecked, "Check dentro do UseCallback"); 
+        
+    }, [isChecked, setIsChecked, setFieldValue]);
 
     return (
         <View style={globalStyles.checkbox}>
