@@ -1,7 +1,7 @@
 # Siam Fight - Admin App
 
 ## Sobre o projeto 
-App desenvolvido para uma academia local com a finalidade de criar um melhor gerênciamento de clientes, embora eu já possuísse um conhecimento prévio em JavaScript e CSS, foi o meu primeiro contato com todas as tecnologias utilizadas 
+App desenvolvido para uma academia local com a finalidade de criar um melhor gerênciamento de clientes e pagamentos
 
 ## 📲 Tecnologias utilizadas
 
@@ -24,4 +24,5 @@ Este app permite :
 ## 🛠 Updates Futuros 
 - Melhoria na utilização do TypeScript, foi utilizado diversas vezes o recurso "any", deixando a tipagem automática 
 - Criação de uma nova Feature para gerar um histórico mensal de pagamentos 
-- Metódos de backup local e online 
+- Metódos de backup local e online
+- Nota tela com relatorios financeiros dos últimos meses
