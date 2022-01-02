@@ -60,8 +60,9 @@ export function AddClient() {
                     resetForm();
                     navigation.navigate('Search' , { screen: 'SearchClient', params: { addNotification: "Cliente Adicionado !" }});
             }} >
-            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, validateForm, touched  }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched  }) => (
                 <ScrollView>
+                {console.log("Log dentro do form")}
                 <SfTextInput 
                     label={"Nome"}
                     placeholder="Nome"
@@ -132,20 +133,19 @@ export function AddClient() {
                     fieldId="prefTime"
                     value={values.prefTime}
                     setFieldValue={setFieldValue} 
-                />
-                {/* <CheckBox 
+                /> 
+                <CheckBox 
                     title="Pratica Atividade Fisica"
                     fieldId="physicalActivity"
                     value={values.physicalActivity}
                     setFieldValue={setFieldValue} 
-                />
+                />  
                  <CheckBox
                     title="Cliente Ativo?" 
                     fieldId="statusClient"
                     value={values.statusClient}
                     setFieldValue={setFieldValue} 
-                /> */}
-                {console.log('vaisefu')}
+                /> 
                 <View style={globalStyles.errorWrap}>
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
                     {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}

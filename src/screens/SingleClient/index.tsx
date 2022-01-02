@@ -68,19 +68,17 @@ export function SingleClient({ navigation, route}: any) {
                 // validationSchema={validation}
                 initialValues={cliente}
                 onSubmit={ (values) => {
-                    console.log('handle submit', values);
-                    
                     updateClientData(values);
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <ScrollView>
-                <SfTextInput 
+                 <SfTextInput 
                     label={"Nome"}
                     placeholder="Nome"
                     value={values.name || cliente.name}
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
-                />
+                /> 
                 <DatePicker 
                     title="Data de Nascimento"
                     iconName="activity"
@@ -89,7 +87,7 @@ export function SingleClient({ navigation, route}: any) {
                     value={route.params.birthDate}
                     setFieldValue={setFieldValue} 
                 />
-                <SfTextInput 
+                 <SfTextInput 
                     label={"Contato 1"}
                     value={values.contact1 || cliente.contact1}
                     placeholder="Contato 1"
@@ -157,7 +155,7 @@ export function SingleClient({ navigation, route}: any) {
                     value={cliente.statusClient}
                     setFieldValue={setFieldValue} 
                 />
-                
+                {console.log('SingleClient')}
                 <View style={globalStyles.button}>
                     <Button color="#3BBC92" title="Confirmar Alterações" onPress={handleSubmit}/>
                 </View>
@@ -166,11 +164,9 @@ export function SingleClient({ navigation, route}: any) {
                 
                 </ScrollView>
                 )}
-                </Formik>
+                </Formik> 
 
-            
         </View>
     )
 }
-
 

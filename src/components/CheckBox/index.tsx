@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Text, View, Button, ScrollView } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { styles } from '../../screens/SearchClient/style';
@@ -9,7 +9,7 @@ interface Props {
     title: string;
     setFieldValue: any;
     fieldId: string;
-    value: any;
+    value?: any;
 }
 
 export function CheckBox(props: Props) {
@@ -17,19 +17,22 @@ export function CheckBox(props: Props) {
     const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
+        // Set Initial Value
         setIsChecked(value);
-    }, [value]);
+        
+    }, []);
 
-    useEffect(() => {
-        // Send data to form
+    const changeValue = useCallback(() => {
+        setIsChecked(!isChecked);
         setFieldValue(fieldId, isChecked);
-    }, [isChecked]);
+
+    }, []);
 
     return (
         <View style={globalStyles.checkbox}>
             <Checkbox
                 status={isChecked ? 'checked' : 'unchecked'}
-                onPress={() => setIsChecked(!isChecked)}
+                onPress={changeValue}
                 color='#4ecca3'
                 uncheckedColor='#4ecca3'
             />
