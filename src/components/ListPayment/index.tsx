@@ -8,10 +8,12 @@ import { useNavigation } from '@react-navigation/core';
 export function ListPayment(props: any) {
     const { cliente } = props;
     const navigation : any = useNavigation();
-    const [currentDate, setCurrentDate] = useState<Date>(new Date());
-
+    const [nextPayment, setNextPayment] = useState<Date>(new Date());
+  
     useEffect(() => {
-        setCurrentDate(new Date(cliente.payDay));
+        let currentDate = new Date(cliente.payDay);
+        currentDate.setDate(currentDate.getDate() + 30);
+        setNextPayment(currentDate);
     }, [cliente.payDay]);
     
     return (
@@ -23,9 +25,9 @@ export function ListPayment(props: any) {
             <Icon name="user" style={styles.icon}/>
             <Text style={{...globalStyles.titleSmall, ...styles.userName}}>
             <View style={styles.dateWrap}>
-              <Text style={styles.text}>{currentDate.getDate()} /</Text> 
-              <Text style={styles.text}>{currentDate.getMonth() +1} /</Text>
-              <Text style={styles.text}>{currentDate.getFullYear()}</Text>
+              <Text style={styles.text}>{nextPayment.getDate()} /</Text> 
+              <Text style={styles.text}>{nextPayment.getMonth() +1} /</Text>
+              <Text style={styles.text}>{nextPayment.getFullYear()}</Text>
             </View>
             </Text>
             <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>

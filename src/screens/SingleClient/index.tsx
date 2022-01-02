@@ -7,10 +7,8 @@ import { HeaderScreen  } from '../../components/header';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { DatePicker } from './../../components/DatePicker/index';
-import { CheckBox } from '../../components/CheckBox/index';
 import { styles } from './style';
 import { SfTextInput } from './../../components/TextInput/index';
-import { string } from 'yup/lib/locale';
 
 const validation : any = Yup.object().shape({
     name: Yup.string().required("O campo Nome é obrigatório"),
@@ -31,7 +29,7 @@ export function SingleClient({ navigation, route}: any) {
         setPhysicalActivity(cliente.physicalActivity);  
         setStatusClient(cliente.statusClient);  
         setProfessor(cliente.professor);
-        
+
     }, [cliente]);
 
     const togglePhysicalActivity = () => setPhysicalActivity(previousState => !previousState);
@@ -76,7 +74,7 @@ export function SingleClient({ navigation, route}: any) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Cliente {route.params.name} </Text>
+            <Text style={globalStyles.title}>Cliente : {route.params.name} </Text>
             <Formik
                 // validationSchema={validation}
                 initialValues={cliente}

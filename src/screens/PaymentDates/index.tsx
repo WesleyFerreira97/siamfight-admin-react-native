@@ -22,23 +22,28 @@ export function PaymentDates() {
     }
   }, [allClients]);
 
-  // useEffect(() => {
-  //   let newList : any = [...activeClients];
-  //   console.log(newList);
+  const orderByDate = (list: any[]) => {
+  let newList : any = [...activeClients];
     
-  //   // const listAsc = () => { 
-  //   //   newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
-  //   //   setDateAsc(newList);
-  //   // }
-  //   // listAsc();
-  // }, [activeClients]);
+    const listAsc = () => { 
+      newList.sort((firstClient: any, secondClient: any) => secondClient.payDay.localeCompare(firstClient.payDay))
+      setDateAsc(newList);
+    }
+    listAsc();
+  }
 
+  useEffect(() => {
+    if(activeClients.length > 0) {
+      orderByDate(activeClients);
+    }  
+  }, [activeClients]);
 
   return (
-    <View style={globalStyles.container} >
+    <View style={globalStyles.container}>
+        {console.log(dateAsc)}
         <Text style={globalStyles.title}>Próximos Vencimentos</Text>
         <FlatList 
-          data={activeClients}
+          data={dateAsc}
           renderItem={({ item }) => <ListPayment cliente={item} />}
           keyExtractor={(item) => item.id}
         />
