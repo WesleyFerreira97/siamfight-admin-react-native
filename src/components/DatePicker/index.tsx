@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -19,7 +19,6 @@ interface dateTime {
 }
 
 const DateComponent : any = (props: dateTime) => {
-  
   return (
     <View style={dateStyle.dateTimeWrap}>
       <Text style={dateStyle.text}>{props.currentDateTime.getDate()} /</Text> 
@@ -38,26 +37,27 @@ const TimeComponent : any = (props: dateTime) => {
   )
 }
 
+
 export function DatePicker (props: dateProps) {
   const { title, iconName, mode, value, setFieldValue, fieldId } = props;
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
-  const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date())
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [currentDateTime, setCurrentDateTime] = useState<Date>(new Date());
   
   const showDatePicker = () => setDatePickerVisibility(true)
   const hideDatePicker = () => setDatePickerVisibility(false)
   
-  const handleConfirm = (date: any) => {
-    setCurrentDateTime(new Date(date.toLocaleString()));
-    hideDatePicker();
-  }
-  
   useEffect(() => {
+      // Set Initial Value
       setCurrentDateTime(new Date(value));
+
   }, []);
 
-  useEffect(() => {
+  const handleConfirm = useCallback((date: any) => {
+      setCurrentDateTime(new Date(date.toLocaleString()));
       setFieldValue(fieldId, currentDateTime.toLocaleString());
-  }, [currentDateTime]);
+    
+      hideDatePicker();
+  }, [currentDateTime, isDatePickerVisible]);
   
   return (
     <View style={styles.container}>

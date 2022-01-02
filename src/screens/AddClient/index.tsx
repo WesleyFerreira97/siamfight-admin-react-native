@@ -62,7 +62,7 @@ export function AddClient() {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched  }) => (
                 <ScrollView>
-                {console.log("Log dentro do form")}
+                {console.log("ADD Client")}
                 <SfTextInput 
                     label={"Nome"}
                     placeholder="Nome"

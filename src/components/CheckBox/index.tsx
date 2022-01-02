@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Button, ScrollView } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { styles } from '../../screens/SearchClient/style';
@@ -26,7 +26,7 @@ export function CheckBox(props: Props) {
         setIsChecked(!isChecked);
         setFieldValue(fieldId, isChecked);
 
-    }, []);
+    }, [isChecked]);
 
     return (
         <View style={globalStyles.checkbox}>
