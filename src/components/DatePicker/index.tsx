@@ -74,7 +74,7 @@ export function DatePicker (props: dateProps) {
             }
           </View>
           
-      </TouchableOpacity>
+    </TouchableOpacity>
 
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

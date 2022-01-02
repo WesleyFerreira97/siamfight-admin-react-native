@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button, Alert, Switch } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput, RadioButton } from 'react-native-paper';
 import { globalStyles } from '../../styles/globalStyles';
 import { getDocument, deleteClient, updateClient } from '../../services/firebaseFunctions';
 import { HeaderScreen  } from '../../components/header';
@@ -22,14 +22,20 @@ const validation : any = Yup.object().shape({
 export function SingleClient({ navigation, route}: any) {
     const [selectedDate, handleDateChange] = useState(new Date());
     const [cliente, setCliente] = useState<any>({});
-    const [isEnabled, setIsEnabled] = useState(false);
+    const [physicalActivity, setPhysicalActivity] = useState(false);
+    const [statusClient, setStatusClient] = useState(false);
+    const [professor, setProfessor] = useState("afonso");
 
     useEffect(() => {
         // Initial Value
-        setIsEnabled(cliente.physicalActivity);  
+        setPhysicalActivity(cliente.physicalActivity);  
+        setStatusClient(cliente.statusClient);  
+        setProfessor(cliente.professor);
+        
     }, [cliente]);
 
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const togglePhysicalActivity = () => setPhysicalActivity(previousState => !previousState);
+    const toggleStatusClient = () => setStatusClient(previousState => !previousState);
 
     const deleteClientModal = () =>
         Alert.alert(
@@ -79,13 +85,7 @@ export function SingleClient({ navigation, route}: any) {
             }} >
             {({ handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <ScrollView>
-                <Switch
-                    trackColor={{ false: "#fff", true: "#4ecca3" }}
-                    thumbColor={isEnabled ? "#3BBC92" : "#4ecca3"}
-                    onValueChange={(e) => {toggleSwitch(); setFieldValue('physicalActivity', e)}}
-                    value={isEnabled}
-                />
-                 <SfTextInput 
+                <SfTextInput 
                     label={"Nome"}
                     placeholder="Nome"
                     value={values.name || cliente.name}
@@ -140,6 +140,24 @@ export function SingleClient({ navigation, route}: any) {
                     onBlur={handleBlur('valor')}
                     keyboardType = 'numeric'
                 />
+                <View style={globalStyles.inputWrapper}>
+                    <Text style={globalStyles.text}>Pratica atividade fisica?</Text>
+                    <Switch
+                        trackColor={{ false: "#fff", true: "#4ecca3" }}
+                        thumbColor={physicalActivity ? "#3BBC92" : "#4ecca3"}
+                        onValueChange={(e) => {togglePhysicalActivity(); setFieldValue('physicalActivity', e)}}
+                        value={physicalActivity}
+                    />
+                </View>
+                <View style={globalStyles.inputWrapper}>
+                    <Text style={globalStyles.text}>Cliente Ativo? </Text>
+                    <Switch
+                        trackColor={{ false: "#fff", true: "#4ecca3" }}
+                        thumbColor={statusClient ? "#3BBC92" : "#4ecca3"}
+                        onValueChange={(e) => {toggleStatusClient(); setFieldValue('statusClient', e)}}
+                        value={statusClient}
+                    />
+                </View>
                 <DatePicker 
                     title="Data de Pagamento"
                     iconName="calendar"
@@ -156,19 +174,39 @@ export function SingleClient({ navigation, route}: any) {
                     value={route.params.prefTime}
                     setFieldValue={setFieldValue} 
                 />
-                {/* <CheckBox 
-                    title="Pratica Atividade Fisica"
-                    fieldId="physicalActivity"
-                    value={cliente.physicalActivity}
-                    setFieldValue={setFieldValue} 
-                />
-                <CheckBox
-                    title="Cliente Ativo?" 
-                    fieldId="statusClient"
-                    value={cliente.statusClient}
-                    setFieldValue={setFieldValue} 
-                /> */}
-
+                <Text style={globalStyles.inputTitle}>Professor</Text>
+                <View style={globalStyles.inputWrapper}>
+                    <Text style={globalStyles.inputLabel}>Wesley</Text>
+                    <RadioButton
+                        value="gilmar"
+                        status={ professor === 'wesley' ? 'checked' : 'unchecked' }
+                        onPress={() => {setProfessor('wesley'); setFieldValue('professor', "wesley")}}
+                        color='#fff'
+                        uncheckedColor='#4ecca3'
+                    />
+                </View>
+                <View style={globalStyles.inputWrapper}>
+                    <Text style={globalStyles.inputLabel}>Afonso</Text>
+                    <RadioButton
+                        value="gilmar"
+                        status={ professor === 'afonso' ? 'checked' : 'unchecked' }
+                        onPress={() => {setProfessor('afonso'); setFieldValue('professor', "afonso")}}
+                        color='#fff'
+                        uncheckedColor='#4ecca3'
+                    />
+                </View>
+                <View style={globalStyles.inputWrapper}>
+                    <Text style={globalStyles.inputLabel}>Gilmar</Text>
+                    <RadioButton
+                        value="gilmar"
+                        status={ professor === 'gilmar' ? 'checked' : 'unchecked' }
+                        onPress={() => {setProfessor('gilmar'); setFieldValue('professor', "gilmar")}}
+                        color='#fff'
+                        uncheckedColor='#4ecca3'
+                    />
+                    
+                </View>
+{console.log(cliente)}
                 <View style={globalStyles.button}>
                     <Button color="#3BBC92" title="Confirmar Alterações" onPress={handleSubmit}/>
                 </View>

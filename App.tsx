@@ -46,7 +46,7 @@ export default function App() {
           options={{
             title: 'Buscar',
             tabBarIcon: () => (
-              <Icon name="search" size={22} color="#fff" />
+              <Icon name="search" size={23} color="#fff" />
             ),
           }}
         />
@@ -56,7 +56,7 @@ export default function App() {
           options={{
             title: 'Adicionar',
             tabBarIcon: () => (
-              <Icon name="user-plus" size={22} color="#fff"/>
+              <Icon name="user-plus" size={23} color="#fff"/>
             ),
           }}
         />
@@ -64,9 +64,9 @@ export default function App() {
           name="PaymentDates" 
           component={PaymentDates} 
           options={{
-            title: 'PaymentDates',
+            title: 'Vencimentos',
             tabBarIcon: () => (
-              <Icon name="dollar-sign" size={22} color="#fff"/>
+              <Icon name="dollar-sign" size={23} color="#fff"/>
             ),
           }}
         />

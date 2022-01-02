@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        paddingBottom: 5,
-        paddingTop: 7,
+        paddingBottom: 8,
+        paddingTop: 8,
     },
     datePickerButton: {
         borderRadius: 2,
@@ -25,7 +25,7 @@ export const dateStyle = StyleSheet.create({
     iconWrap: {
       display: 'flex',
       justifyContent: 'center',
-      padding: 10,
+      padding: 15,
       borderRadius: 5,
       backgroundColor: '#3BBC92',
     },
@@ -39,13 +39,13 @@ export const dateStyle = StyleSheet.create({
     title: {
       color: '#3BBC92',
       marginTop: 5,
-      marginLeft: 20,
+      marginLeft: 15,
     },
     dateTimeWrap: {
       display: 'flex',
       flexDirection: 'row',
       marginTop: 5,
-      marginLeft: 20,
+      marginLeft: 15,
       color: '#3BBC92',
     },
     text: {

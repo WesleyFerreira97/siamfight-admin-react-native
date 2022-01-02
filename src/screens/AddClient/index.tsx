@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Text, View, Button, ScrollView, TouchableOpacity } from "react-native";
-import { TextInput } from 'react-native-paper';
 import { styles } from './style';
 import { globalStyles } from '../../styles/globalStyles';
 import { addData } from '../../services/firebaseFunctions';
 import { DatePicker } from './../../components/DatePicker/index';
-import { CheckBox } from '../../components/CheckBox/index';
-import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core';
 import { Formik, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
@@ -132,18 +129,6 @@ export function AddClient() {
                     mode="time"
                     fieldId="prefTime"
                     value={values.prefTime}
-                    setFieldValue={setFieldValue} 
-                /> 
-                <CheckBox 
-                    title="Pratica Atividade Fisica"
-                    fieldId="physicalActivity"
-                    value={values.physicalActivity}
-                    setFieldValue={setFieldValue} 
-                />  
-                 <CheckBox
-                    title="Cliente Ativo?" 
-                    fieldId="statusClient"
-                    value={values.statusClient}
                     setFieldValue={setFieldValue} 
                 /> 
                 <View style={globalStyles.errorWrap}>

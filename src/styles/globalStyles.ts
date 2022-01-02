@@ -14,10 +14,18 @@ export const globalStyles = StyleSheet.create( {
     },
     titleSmall: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 16,
     },
     text: {
         color: '#fff',
+    },
+    inputWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 7,
+        marginBottom: 7,
     },
     inputXl: {
         marginTop: 7,
@@ -35,6 +43,15 @@ export const globalStyles = StyleSheet.create( {
     inputSmall: {
         height: 25,
         borderRadius: 5,
+    },
+    inputTitle: {
+        color: '#4ecca3',
+        fontSize: 20,        
+        marginTop: 15,
+    },
+    inputLabel: {
+        fontSize: 17,
+        color: '#fff',
     },
     button: {
         marginBottom: 20,

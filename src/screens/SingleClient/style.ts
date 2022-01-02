@@ -9,4 +9,5 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 7,
     },
+
 });
