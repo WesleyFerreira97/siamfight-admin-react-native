@@ -4,6 +4,7 @@ import { globalStyles } from '../../styles/globalStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { getData } from '../../services/firebaseFunctions';
 import { ListPayment } from '../../components/ListPayment';
+import { styles } from './style';
 
 export function PaymentDates() {
   const [allClients, setAllClients] = useState<any[]>([]);
@@ -38,10 +39,17 @@ export function PaymentDates() {
     }  
   }, [activeClients]);
 
+  useEffect(() => {
+        // [activeClients].map(cliente => { console.log(cliente.name) });
+        console.log(activeClients);
+        
+  }, [activeClients]);
+
   return (
     <View style={globalStyles.container}>
-        {console.log(dateAsc)}
+        {console.log()}
         <Text style={globalStyles.title}>Próximos Vencimentos</Text>
+        <Text style={styles.headerInfo}>Clientes ativos :  {activeClients.length}</Text>
         <FlatList 
           data={dateAsc}
           renderItem={({ item }) => <ListPayment cliente={item} />}

@@ -17,20 +17,23 @@ export function ListPayment(props: any) {
     }, [cliente.payDay]);
     
     return (
-      <View style={styles.form}>
-        
-        {/* <TouchableOpacity onPress={() => navigation.navigate('SingleClient', cliente)}> */}
+      <View style={styles.listWrap}>
         <TouchableOpacity onPress={() => navigation.navigate('Search' , { screen: 'SingleClient', params: cliente })}>
           <View style={styles.listItem} >
             <Icon name="user" style={styles.icon}/>
-            <Text style={{...globalStyles.titleSmall, ...styles.userName}}>
-            <View style={styles.dateWrap}>
-              <Text style={styles.text}>{nextPayment.getDate()} /</Text> 
-              <Text style={styles.text}>{nextPayment.getMonth() +1} /</Text>
-              <Text style={styles.text}>{nextPayment.getFullYear()}</Text>
+            <View style={styles.listInfo}>
+              <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>
+                <View style={styles.dateWrap}>
+                  <View style={styles.dateWrap2}>
+                    <Text style={styles.infoTitle}>Próx. Vencimento : </Text>
+                  </View>
+                  <View style={styles.dateWrap2}>
+                    <Text style={styles.text}>{nextPayment.getDate()} /</Text> 
+                    <Text style={styles.text}>{nextPayment.getMonth() +1} /</Text>
+                    <Text style={styles.text}>{nextPayment.getFullYear()}</Text>
+                  </View>
+                </View>
             </View>
-            </Text>
-            <Text style={{...globalStyles.titleSmall, ...styles.userName}}>{cliente.name}</Text>
           </View>
         </TouchableOpacity>
       </View>
