@@ -202,9 +202,8 @@ export function SingleClient({ navigation, route}: any) {
                         color='#fff'
                         uncheckedColor='#4ecca3'
                     />
-                    
                 </View>
-{console.log(cliente)}
+                
                 <View style={globalStyles.button}>
                     <Button color="#3BBC92" title="Confirmar Alterações" onPress={handleSubmit}/>
                 </View>

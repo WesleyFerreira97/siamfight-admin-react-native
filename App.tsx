@@ -12,6 +12,7 @@ import { SingleClient } from './src/screens/SingleClient/index';
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
+const PaymentScreenStack = createNativeStackNavigator();
 
 function SearchStack() {
   return (
@@ -24,6 +25,19 @@ function SearchStack() {
       <HomeStack.Screen name="SearchClient" component={SearchClient} />
       <HomeStack.Screen name="SingleClient" component={SingleClient} />
     </HomeStack.Navigator>
+  );
+}
+function PaymentStack() {
+  return (
+    <PaymentScreenStack.Navigator
+      initialRouteName="PaymentDates"
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <PaymentScreenStack.Screen name="PaymentDates" component={PaymentDates} />
+      <PaymentScreenStack.Screen name="SingleClient" component={SingleClient} />
+    </PaymentScreenStack.Navigator>
   );
 }
 
@@ -61,8 +75,8 @@ export default function App() {
           }}
         />
         <Tab.Screen 
-          name="PaymentDates" 
-          component={PaymentDates} 
+          name="Payment" 
+          component={PaymentStack} 
           options={{
             title: 'Vencimentos',
             tabBarIcon: () => (

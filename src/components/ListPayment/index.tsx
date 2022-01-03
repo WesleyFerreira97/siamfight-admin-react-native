@@ -18,7 +18,7 @@ export function ListPayment(props: any) {
     
     return (
       <View style={styles.listWrap}>
-        <TouchableOpacity onPress={() => navigation.navigate('Search' , { screen: 'SingleClient', params: cliente })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Payment' , { screen: 'SingleClient', params: cliente })}>
           <View style={styles.listItem} >
             <Icon name="user" style={styles.icon}/>
             <View style={styles.listInfo}>
