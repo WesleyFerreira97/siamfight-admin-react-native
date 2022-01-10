@@ -24,5 +24,5 @@ Este app permite :
 ## 🛠 Updates Futuros 
 - Melhoria na utilização do TypeScript, foi utilizado diversas vezes o recurso "any", deixando a tipagem automática 
 - Criação de uma nova Feature para gerar um histórico mensal de pagamentos 
-- Metódos de backup local e online
-- Nota tela com relatorios financeiros dos últimos meses
+- Metódos de backup
+- Nova Tela com relatorios financeiros dos últimos meses
