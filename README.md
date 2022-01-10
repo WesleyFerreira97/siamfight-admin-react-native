@@ -5,9 +5,9 @@ App desenvolvido para uma academia local com a finalidade de criar um melhor ger
 ##
 
 <p >
-  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(5).jpg?raw=true" width="300" title="Todos Clientes">
-  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(3).jpg" width="300" title="Cadastro de Clientes">
-  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(1).jpg" width="300" alt="Vencimentos">
+  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(5).jpg?raw=true" width="33%" title="Todos Clientes">
+  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(3).jpg" width="33%" title="Cadastro de Clientes">
+  <img src="https://github.com/WesleyFerreira97/siamfight-admin-react-native/blob/main/ScreenShots/Screenshot%20(1).jpg" width="33%" alt="Vencimentos">
 </p>
 
 ## 📲 Tecnologias utilizadas
