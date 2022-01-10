@@ -1,6 +1,13 @@
+<p>
+<img src="https://img.shields.io/static/v1?label=React Native&message=v.0.66.3&color=61DAFB&style=for-the-badge&logo=react"/>
+<img src="https://img.shields.io/static/v1?label=React Navigation&message=v.6.0.9&color=61DAFB&style=for-the-badge&logo=react"/>
+<img src="https://img.shields.io/static/v1?label=Firebase&message=v.9.6.0&color=FFCA28&style=for-the-badge&logo=firebase"/>
+</p>
+
+
 # Siam Fight - Admin App
 
-## Sobre o projeto 
+### Sobre o projeto 
 App desenvolvido para uma academia local com a finalidade de criar um melhor gerênciamento de clientes e pagamentos
 ##
 
