@@ -19,7 +19,7 @@ export function SearchClient({ navigation, route }: any) {
   const onDismissSnackBar = () => setSnackBarVisible(false);
 
   const listAsc = (list: any[]) => {
-    let newList : any = [...list];
+    let newList : any = [...list]; 
 
     newList.sort((firstClient: any, secondClient: any) => firstClient.name.localeCompare(secondClient.name))
     setClientes(newList);

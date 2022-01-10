@@ -24,10 +24,10 @@ interface MyValues  {
 }
 
 const validation : any = Yup.object().shape({
-    // name: Yup.string().required("O campo Nome é obrigatório"),
-    // contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
-    // valor: Yup.number().required("O campo Valor é obrigatório"),
-    // payDay: Yup.string().required("O campo Data de pagamento é obrigatório"),
+    name: Yup.string().required("O campo Nome é obrigatório"),
+    contact1: Yup.string().required("O campo Contato 1 é obrigatório"),
+    valor: Yup.number().required("O campo Valor é obrigatório"),
+    payDay: Yup.date().required("O campo Data de pagamento é obrigatório"),
 });
 
 export function AddClient() {
@@ -133,8 +133,8 @@ export function AddClient() {
                 <View style={globalStyles.errorWrap}>
                     {errors.name && touched.name && <Text style={globalStyles.error}>{errors.name}</Text>}
                     {errors.contact1 && touched.contact1 && <Text style={globalStyles.error}>{errors.contact1}</Text>}
-                    {errors.valor && touched.valor && <Text style={globalStyles.error}>{errors.valor}</Text>}
                     {errors.payDay && touched.payDay && <Text style={globalStyles.error}>{errors.payDay}</Text>}
+                    {errors.valor && touched.valor && <Text style={globalStyles.error}>{errors.valor}</Text>}
                 </View>
 
                 <TouchableOpacity >

@@ -9,6 +9,8 @@ import * as Yup from 'yup';
 import { DatePicker } from './../../components/DatePicker/index';
 import { styles } from './style';
 import { SfTextInput } from './../../components/TextInput/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const validation : any = Yup.object().shape({
     name: Yup.string().required("O campo Nome é obrigatório"),
@@ -66,9 +68,18 @@ export function SingleClient({ navigation, route}: any) {
         });
     }
 
+    const storeData = async (value: any) => {
+        try {
+          await AsyncStorage.setItem('@storage_Key', value)
+        } catch (e) {
+          // saving error
+        }
+    }
+
     async function updateClientData (updateData: object) {
         updateClient('cliente', route.params.id, updateData).then(() => {
             navigation.navigate('Search' , { screen: 'SearchClient', params: { updateNotification: "Cliente Atualizado !" }});
+            storeData('Cliente Atualizado !');
         });
     }
 

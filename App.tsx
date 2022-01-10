@@ -27,6 +27,7 @@ function SearchStack() {
     </HomeStack.Navigator>
   );
 }
+
 function PaymentStack() {
   return (
     <PaymentScreenStack.Navigator

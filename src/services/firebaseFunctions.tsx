@@ -12,8 +12,8 @@ export async function addData( collectionName: string, data: object )  {
         await addDoc(collection(db, collectionName), data);
     } catch (error) {
         console.error("Erro : ", error);
-        
     }
+
 }
 
 export async function getData( collectionName: string )  {
@@ -26,6 +26,7 @@ export async function getData( collectionName: string )  {
     } catch (error) {
         console.error("Erro : ", error);
     }
+
 }
 
 export async function getDocument( collectionName: string , docID: string) {
@@ -37,6 +38,7 @@ export async function getDocument( collectionName: string , docID: string) {
     } catch (error) {
         console.log("Erro : ", error);
     }
+
 }
 
 export async function updateClient( collectionName: string , docID: string, dataClient: object ) {
@@ -53,9 +55,11 @@ export async function updateClient( collectionName: string , docID: string, data
 
 export async function deleteClient(collectionName: string , id: string ) {
     const docItem = doc(db, collectionName, id);
+   
     try {
         await deleteDoc(docItem);
     } catch (error) {
         console.error("Erro : ", error);
     }
+
 }
